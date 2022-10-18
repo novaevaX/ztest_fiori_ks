@@ -12,6 +12,7 @@ sap.ui.define([
 
 		onInit: function () {
 			/*
+			test push
 			console.log("Start load");
 			var oModel = this.getOwnerComponent().getModel("typeDoc"); 
 			//this.setModel(this.getComponentModel(sPath), "typeDoc");

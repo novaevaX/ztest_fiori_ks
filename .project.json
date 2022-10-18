@@ -35,12 +35,12 @@
     "blockPushLevel": "Error"
   },
   "build": {
-    "buildRequired": false,
+    "buildRequired": true,
     "sourceFolder": "webapp",
     "targetFolder": "dist",
     "excludedFolders": [],
     "excludedFiles": [],
-    "lastBuildDateTime": "Tue, 18 Oct 2022 12:42:28 GMT"
+    "lastBuildDateTime": "Tue, 18 Oct 2022 13:31:15 GMT"
   },
   "deploy": {
     "destination": "S4D",
