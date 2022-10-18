@@ -1,0 +1,77 @@
+<mvc:View 
+    controllerName="ztest_fiori_ks.controller.Create01" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    displayBlock="true"
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+>
+    <Shell>
+        <App>
+            <pages>
+                <Page 
+                    title = "{i18n>titlePageCreate01}"
+                    showNavButton = "true"
+                    navButtonPress = "onBack">
+
+                    <Panel
+                        class = "sapUiResponsiveMargin"
+                        width = "auto">
+                    <content>
+                    
+                    <layout:VerticalLayout>
+                        <Button
+                            text = "{i18n>nameButtonExit}"
+                            press = ".onExit"
+                            icon="sap-icon://undo"/>
+                    </layout:VerticalLayout>
+                        <f:SimpleForm title="{i18n>titleCreateOrder}">
+                        
+				        <f:content>
+					        <Label text="{i18n>typeDoc}"
+                                class= "sapUiSmallMargin"
+                                />
+					        <Input 
+                                id="typeInput"
+                                value="{/recipient/name}"
+                                valueLiveUpdate="true"
+                                placeholder="пример: SH1"
+                                showValueHelp="true"
+                                
+                                width="30%" 
+                                maxLength="3"
+                                valueState="Error"
+                                valueStateText="Type must not be empty. Maximum 3 characters."
+                                change=".onChange"
+                                >
+			                        
+                                </Input>
+					        <Label text="{i18n>numberDoc}"
+                                class= "sapUiSmallMargin"/>
+					        <Input 
+                                id="numberInput"
+                                value="{/recipient/name}"
+                                valueLiveUpdate="true"
+                                placeholder="пример: 00"
+                                maxLength="2"
+                                valueState="Error"
+                                valueStateText="Name must not be empty. Maximum 2 characters."
+                                change=".onChange"
+                                width="30%" />
+				        </f:content>
+			            </f:SimpleForm>
+                        <Button
+                            text = "{i18n>nameButtonCreateDoc}"
+                            press = ".onCreate"
+                            icon="sap-icon://create-form"/>
+                    
+                    </content>
+                    </Panel>
+
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

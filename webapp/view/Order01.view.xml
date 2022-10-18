@@ -1,0 +1,61 @@
+<mvc:View 
+    controllerName="ztest_fiori_ks.controller.Order01" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    displayBlock="true"
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:f="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+>
+    <Shell>
+        <App>
+            <pages>
+                <Page 
+                    title = "{i18n>titlePageOrder01}"
+                    showNavButton = "true"
+                    navButtonPress = "onBack">
+
+                    <Panel
+                        class = "sapUiResponsiveMargin"
+                        width = "auto">
+                    <content>
+                    
+                    <layout:VerticalLayout>
+                        <Button
+                            text = "{i18n>nameButtonExit}"
+                            press = ".onExit"
+                            icon="sap-icon://undo"/>
+                    </layout:VerticalLayout>
+                        <f:SimpleForm title="{i18n>titlePageText}">
+                        
+				        <f:content>
+					        <Label text="{i18n>nameNumberDoc}"
+                                class= "sapUiSmallMargin"
+                                />
+					        <Input 
+                                id="numberDoc"
+                                value="{/recipient/name}"
+                                valueLiveUpdate="true"
+                                placeholder="пример: SH1000032234234"
+                                showValueHelp="true"
+                                width="50%" 
+                                maxLength="10"
+                                valueState="Error"
+                                valueStateText="Type must not be empty. Maximum 10 characters."
+                                change=".onChange"
+                                />
+				        </f:content>
+			            </f:SimpleForm>
+                        <Button
+                            text = "{i18n>nameButtonOpenDoc}"
+                            press = ".onOpenDoc"
+                            icon="sap-icon://open-command-field"/>
+                    
+                    </content>
+                    </Panel>
+
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
