@@ -11,7 +11,7 @@
 							<f:SimpleForm title="{i18n>titleCreateOrder}">
 								<f:content>
 									<Label text="{i18n>typeDoc}" class="sapUiSmallMargin"/>
-									<Select id="oSelectType" width="30%" valueState="Error" items="{/zdctypeDocSet}" change=".onChange">
+									<Select id="oSelectType" width="30%" items="{/zdctypeDocSet}">
 										<c:Item text="{ztype}"/>
 									</Select>
 									<Label text="{i18n>numberDoc}" class="sapUiSmallMargin"/>

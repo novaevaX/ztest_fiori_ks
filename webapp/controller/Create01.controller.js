@@ -37,7 +37,6 @@ sap.ui.define([
 			// collect input controls
 			var oView = this.getView(),
 				aInputs = [
-				oView.byId("typeInput"),
 				oView.byId("numberInput")
 			],
 				bValidationError = false;
@@ -49,9 +48,6 @@ sap.ui.define([
 			}, this);
 
 			if (!bValidationError) {
-				var typeInput = oView.byId("typeInput")._lastValue;
-				sap.ui.getCore().setModel(typeInput, "typeInput");
-
 				var randInput = oView.byId("numberInput")._lastValue;
 				sap.ui.getCore().setModel(randInput, "randInput");
 
@@ -80,46 +76,6 @@ sap.ui.define([
 
 		onExit: function(){
 			this.getOwnerComponent().getRouter().navTo("page1");
-		} /*,
-		onValueHelpRequest: function (oEvent) {
-			var sInputValue = oEvent.getSource().getValue(),
-				oView = this.getView();
-
-			if (!this._pValueHelpDialog) {
-				this._pValueHelpDialog = Fragment.load({
-					id: oView.getId(),
-					name: "sap.m.sample.InputAssisted.ValueHelpDialog",
-					controller: this
-				}).then(function (oDialog) {
-					oView.addDependent(oDialog);
-					return oDialog;
-				});
-			}
-			this._pValueHelpDialog.then(function(oDialog) {
-				// Create a filter for the binding
-				oDialog.getBinding("items").filter([new Filter("Name", FilterOperator.Contains, sInputValue)]);
-				// Open ValueHelpDialog filtered by the input's value
-				oDialog.open(sInputValue);
-			});
-		},
-
-		onValueHelpSearch: function (oEvent) {
-			var sValue = oEvent.getParameter("value");
-			var oFilter = new Filter("Name", FilterOperator.Contains, sValue);
-
-			oEvent.getSource().getBinding("items").filter([oFilter]);
-		},
-
-		onValueHelpClose: function (oEvent) {
-			var oSelectedItem = oEvent.getParameter("selectedItem");
-			oEvent.getSource().getBinding("items").filter([]);
-
-			if (!oSelectedItem) {
-				return;
-			}
-
-			this.byId("productInput").setValue(oSelectedItem.getTitle());
-		}
-		*/
+		} 
     });
 });
