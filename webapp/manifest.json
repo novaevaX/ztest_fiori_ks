@@ -10,11 +10,21 @@
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"sourceTemplate": {
-			"id": "ui5template.basicSAPUI5ApplicationProject",
-			"version": "1.40.12"
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
 		},
 		"crossNavigation": {
 			"inbounds": {}
+		},
+		"dataSources": {
+			"ZTEST_FIORI_KOSI_SRV": {
+				"uri": "/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
 		}
 	},
 	"sap.ui": {

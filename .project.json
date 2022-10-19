@@ -13,6 +13,11 @@
       "templateId": "ui5template.basicSAPUI5ApplicationProject",
       "templateVersion": "1.40.12",
       "dateTimeStamp": "Thu, 13 Oct 2022 13:49:04 GMT"
+    },
+    {
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Wed, 19 Oct 2022 09:30:44 GMT"
     }
   ],
   "translation": {
@@ -45,5 +50,17 @@
   "deploy": {
     "destination": "S4D",
     "name": "zbsp_uitestkosi"
+  },
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "dataBinding": {
+    "/webapp/view/Create01.view.xml": {
+      "entitySet": "/zdctypeDocSet"
+    }
   }
 }

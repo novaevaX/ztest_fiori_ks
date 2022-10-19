@@ -11,16 +11,8 @@ sap.ui.define([
     return Controller.extend("ztest_fiori_ks.controller.Create01", {
 
 		onInit: function () {
-			/*
-			test push
-			console.log("Start load");
-			var oModel = this.getOwnerComponent().getModel("typeDoc"); 
-			//this.setModel(this.getComponentModel(sPath), "typeDoc");
-			//var oModel = new JSONModel(sPath);
-			console.log(oModel);
-			console.log("create oModel");
-			this.getView().setModel(oModel);
-			*/
+			var oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
+			this.getView().byId("oSelectType").setModel(oModel);
 		},
 		onChange: function(oEvent) {
 			var oInput = oEvent.getSource();
