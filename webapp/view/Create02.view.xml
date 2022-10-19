@@ -8,6 +8,7 @@
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
     xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:c="sap.ui.core"
     xmlns:f="sap.ui.layout.form"
     xmlns:l="sap.ui.layout"
     xmlns:m="sap.m"
@@ -37,11 +38,13 @@
                                                 <Label text="Тип документа :" class="sapUiSmallMargin" />
                                                 <Input value="{/type}" enabled="false" />
                                                 <Label id="idClient" text="Номер клиента :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" valueLiveUpdate="true" showValueHelp="true"/>
+                                                <Select id="oSelectClient" items="{/zstclientSet}">
+                                                	<c:Item text="{Id}"/>
+                                                </Select>
                                                 <Label text="Нзавание организации :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" valueLiveUpdate="true" />
+                                                <Input value="{/recipient/name}" enabled="false" valueLiveUpdate="true" />
                                                 <Label text="Адрес клиента :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" valueLiveUpdate="true" />
+                                                <Input value="{/recipient/name}" enabled="false" />
                                             </f:content>
                                         </f:SimpleForm>
                                     </VBox>

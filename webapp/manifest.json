@@ -42,10 +42,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_belize"
-		]
+		"supportedThemes": ["sap_hcb", "sap_belize"]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -74,14 +71,22 @@
 				"settings": {
 					"bundleName": "ztest_fiori_ks.i18n.i18n"
 				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZTEST_FIORI_KOSI_SRV",
+				"preload": true
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
 			"config": {
@@ -96,53 +101,37 @@
 					"target": []
 				}
 			},
-			"routes": [
-				{
-					"name": "page1",
-					"pattern": "",
-					"titleTarget": "",
-					"greedy": true,
-					"target": [
-						"page1"
-					]
-				},
-				{
-					"name": "page2",
-					"pattern": "CreateOrder",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page2"
-					]
-				},
-				{
-					"name": "page3",
-					"pattern": "Order",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page3"
-					]
-				},
-				{
-					"name": "page4",
-					"pattern": "ViewOrder",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page4"
-					]
-				},
-				{
-					"name": "page5",
-					"pattern": "View",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page5"
-					]
-				}
-			],
+			"routes": [{
+				"name": "page1",
+				"pattern": "",
+				"titleTarget": "",
+				"greedy": true,
+				"target": ["page1"]
+			}, {
+				"name": "page2",
+				"pattern": "CreateOrder",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["page2"]
+			}, {
+				"name": "page3",
+				"pattern": "Order",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["page3"]
+			}, {
+				"name": "page4",
+				"pattern": "ViewOrder",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["page4"]
+			}, {
+				"name": "page5",
+				"pattern": "View",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["page5"]
+			}],
 			"targets": {
 				"page1": {
 					"viewType": "XML",

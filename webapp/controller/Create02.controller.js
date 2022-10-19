@@ -9,8 +9,11 @@ sap.ui.define([
 	var id;
     return Controller.extend("ztest_fiori_ks.controller.Create02", {
 		onInit : function (){
+			var oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
+			this.getView().byId("oSelectClient").setModel(oModel);
+			
 			this._getDateResorces();
-			const myUniqueID = uid();
+			var myUniqueID = uid();
 			id = myUniqueID;
 			var newDate = new Date();
 			date = newDate;
@@ -18,9 +21,9 @@ sap.ui.define([
 			this._getDateResorces();
 		},
 		_getDateResorces: function(){
-			const typeInput = sap.ui.getCore().getModel("typeInput");
+			var typeInput = sap.ui.getCore().getModel("typeInput");
 
-			const randInput = sap.ui.getCore().getModel("randInput");	
+			var randInput = sap.ui.getCore().getModel("randInput");	
 
 			var oDate = new sap.ui.model.json.JSONModel({
 				date: date,
