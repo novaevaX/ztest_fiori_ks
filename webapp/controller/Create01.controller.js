@@ -15,6 +15,10 @@ sap.ui.define([
 			this.getView().byId("oSelectType").setModel(oModel);
 		},
 		onCreate: function(){
+			//получаем значение выбранного типа и сохраняем для следующей вьюшки
+			var typeInput = this.getView().byId("oSelectType").getSelectedItem().getText();
+			sap.ui.getCore().setModel(typeInput, "oSelectType");
+			//переход на следующую вью
 			this.getOwnerComponent().getRouter().navTo("page3");
 		},
 

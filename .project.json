@@ -17,7 +17,7 @@
     {
       "templateId": "servicecatalog.connectivityComponent",
       "templateVersion": "0.0.0",
-      "dateTimeStamp": "Wed, 19 Oct 2022 13:13:47 GMT"
+      "dateTimeStamp": "Sun, 23 Oct 2022 19:16:26 GMT"
     }
   ],
   "translation": {
@@ -45,11 +45,11 @@
     "targetFolder": "dist",
     "excludedFolders": [],
     "excludedFiles": [],
-    "lastBuildDateTime": "Tue, 18 Oct 2022 13:31:15 GMT"
+    "lastBuildDateTime": "Wed, 19 Oct 2022 13:20:05 GMT"
   },
   "deploy": {
     "destination": "S4D",
-    "name": "zbsp_uitestkosi"
+    "name": "ZBSP_UITESTKOSI"
   },
   "mockpreview": {
     "mockUri": "/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV",
