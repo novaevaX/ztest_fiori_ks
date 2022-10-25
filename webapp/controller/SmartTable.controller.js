@@ -3,7 +3,7 @@ sap.ui.define([
   ], function(Controller) {
     "use strict";
     return Controller.extend("ztest_fiori_ks.controller.SmartTable", {
-      onInit: function() {
+      onInit: function() { 
         // this.getView().bindElement("/Documents");
       }
     });
