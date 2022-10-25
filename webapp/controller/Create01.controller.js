@@ -2,11 +2,13 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/UIComponent",
+	"sap/ui/model/Model",
 	"sap/ui/core/routing/History",
+	"sap/ui/model/odata/v2/ODataModel",
 	"sap/ui/core/Fragment",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, History, UIComponent, JSONModel, Fragment, Filter, FilterOperator){
+], function (Controller, History, UIComponent, Model, JSONModel, ODataModel, Fragment, Filter, FilterOperator){
     "use strict";
     return Controller.extend("ztest_fiori_ks.controller.Create01", {
 
