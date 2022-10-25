@@ -61,7 +61,43 @@
                     </Panel>
                     <Panel class="sapUiResponsiveMargin" width="auto">
                         <m:content>
-                            <mvc:XMLView viewName="sap.ui.demo.testAppUI5.view.SmartTable"/>
+                            <l:VerticalLayout>
+                                <Table id="idPositionTable"  mode="SingleSelectMaster" growing="true" growingThreshold="5" selectionChange="onSelectionChange" updateFinished="onUpdateFinished">
+                                    <headerToolbar>
+                                        <Toolbar>
+                                            <Title text="{i18n>nameTable}" />
+                                            <Button text="{i18n>nameButtonAddRow}" press=".onAddRow" icon="sap-icon://add"/>
+                                            <Button text="{i18n>nameButtonDeleteRow}" press=".onDeleteRow" icon="sap-icon://delete"/>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column>
+                                            <Label text="{i18n>id1}" />
+                                        </Column>
+                                        <Column>
+                                            <Label text="{i18n>id2}" />
+                                        </Column>
+                                        <Column>
+                                            <Label text="{i18n>id3}" />
+                                        </Column>
+                                        <Column>
+                                            <Label text="{i18n>id4}" />
+                                        </Column>
+                                        <Column>
+                                            <Label text="{i18n>id5}" />
+                                        </Column>
+                                        <Column>
+                                            <Label text="{i18n>id6}" />
+                                        </Column>
+                                        <Column>
+                                            <Label text="{i18n>id7}" />
+                                        </Column>
+                                        <Column>
+                                            <Label text="{i18n>id8}" />
+                                        </Column>
+                                    </columns>
+                                </Table>
+                            </l:VerticalLayout>
                         </m:content>
                     </Panel>
                 </m:Page>
