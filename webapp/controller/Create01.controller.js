@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, History, UIComponent, JSONModel, Fragment, Filter, FilterOperator){
     "use strict";
     return Controller.extend("ztest_fiori_ks.controller.Create01", {
-
+//
 		onInit: function () {
 			var oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
 			this.getView().byId("oSelectType").setModel(oModel);

@@ -14,7 +14,7 @@ sap.ui.define([
 			id = myUniqueID;
 			var newDate = new Date();
 			date = newDate;
-
+//
 			this._getDateResorces();
 		},
 		_getDateResorces: function(){
