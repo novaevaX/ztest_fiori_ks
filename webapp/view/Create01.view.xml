@@ -14,8 +14,6 @@
 									<Select id="oSelectType" width="30%" items="{/zdctypeDocSet}">
 										<c:Item text="{ztype}"/>
 									</Select>
-									<Label text="{i18n>numberDoc}" class="sapUiSmallMargin"/>
-									<Input id="numberInput" value="{/recipient/name}" valueLiveUpdate="true" placeholder="пример: 00" maxLength="2" valueState="Error" valueStateText="Name must not be empty. Maximum 2 characters." change=".onChange" width="30%"/>
 								</f:content>
 							</f:SimpleForm>
 							<Button text="{i18n>nameButtonCreateDoc}" press=".onCreate" icon="sap-icon://create-form"/>
