@@ -1,4 +1,4 @@
-<mvc:View controllerName="sap.ui.demo.testAppUI5.controller.SmartTable" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="ztest_fiori_ks.controller.SmartTable" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable">
 	<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="Document" persistencyKey="SmartFilterPKey">
 		<smartFilterBar:controlConfiguration>
