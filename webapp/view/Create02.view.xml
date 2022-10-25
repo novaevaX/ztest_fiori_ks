@@ -1,49 +1,53 @@
-<mvc:View
-    controllerName="ztest_fiori_ks.controller.Create02"
-    xmlns:html="http://www.w3.org/1999/xhtml" 
-    displayBlock="true"
-    xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:layout="sap.ui.layout"
-    xmlns:core="sap.ui.core"
-    xmlns:form="sap.ui.layout.form"
-    xmlns:grid="sap.ui.layout.cssgrid"
-    xmlns:f="sap.ui.layout.form"
-    xmlns:l="sap.ui.layout"
-    xmlns:m="sap.m"
-    class="GridDataSample"
-    id="view"
-> <!---->
-    <Shell>
-        <App>
-            <pages>
-            	<m:Page title="{i18n>titlePageCreate01}" showNavButton="true" navButtonPress="onBack">
-                    <Panel class="sapUiResponsiveMargin" width="auto">
-                        <content>
-                            <l:VerticalLayout width="90%" class="gridWrapper">
-                                <grid:CSSGrid id="grid1" gridAutoFlow="Column" gridTemplateColumns="1fr" gridTemplateRows="2rem" gridAutoRows="4.5rem" gridGap="1rem">
-                                    <VBox class="demoBox">
-                                        <layoutData>
-                                            <grid:GridItemLayoutData gridRow="1 / 7" />
-                                        </layoutData>
-                                        <f:SimpleForm id="panel" title="{i18n>titleCreateOrder}">
-                                            <f:content>
-                                                <Label text="Дата :" class="sapUiSmallMargin" />
-                                                <Input value="{/date}" enabled="false"/>
-                                                <Label text="Пользователь :" class="sapUiSmallMargin" />
-                                                <Input value="{/user}" enabled="false" />
-                                                <Label text="Номер документа :" class="sapUiSmallMargin" />
-                                                <Input value="{/number}" enabled="false" />
-                                                <Label text="Тип документа :" class="sapUiSmallMargin" />
-                                                <Input value="{/type}" enabled="false" />
-                                                <Label id="idClient" text="Номер клиента :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" valueLiveUpdate="true" showValueHelp="true"/>
-                                                <Label text="Нзавание организации :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" valueLiveUpdate="true" />
-                                                <Label text="Адрес клиента :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" valueLiveUpdate="true" />
-                                            </f:content>
-                                        </f:SimpleForm>
+<mvc:View controllerName="ztest_fiori_ks.controller.Create02" xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true" xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+	xmlns:grid="sap.ui.layout.cssgrid" xmlns:c="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:m="sap.m"
+	class="GridDataSample" id="view">
+	<Shell>
+		<App>
+			<pages>
+				<m:Page title="{i18n>titlePageCreate01}" showNavButton="true" navButtonPress="onBack">
+					<Panel class="sapUiResponsiveMargin" width="auto">
+						<content>
+							<l:VerticalLayout width="90%" class="gridWrapper">
+								<grid:CSSGrid id="grid1" gridAutoFlow="Column" gridTemplateColumns="1fr" gridTemplateRows="2rem" gridAutoRows="4.5rem" gridGap="1rem">
+									<VBox class="demoBox">
+										<layoutData>
+											<grid:GridItemLayoutData gridRow="1 / 7"/>
+										</layoutData>
+										<f:SimpleForm id="panel" title="{i18n>titleCreateOrder}">
+											<f:content>
+												<Label text="Дата :" class="sapUiSmallMargin"/>
+												<Input value="{/date}" enabled="false"/>
+												<Label text="Пользователь :" class="sapUiSmallMargin"/>
+												<Input value="{/user}" enabled="false"/>
+												<Label text="Номер документа :" class="sapUiSmallMargin"/>
+												<Input value="{/number}" enabled="false"/>
+												<Label text="Тип документа :" class="sapUiSmallMargin"/>
+												<Input value="{/type}" enabled="false"/>
+												<Label id="idClient" text="Номер клиента :" class="sapUiSmallMargin"/>
+												<Input id="oSelectClient" value="{oModelClientInfo>}" placeholder="Enter organization" showSuggestion="true" showTableSuggestionValueHelp="false" change="onChangeId"
+													suggestionRows="{/zstclientSet}">
+													<suggestionColumns>
+														<Column width="3rem">
+															<Label text="ID"/>
+														</Column>
+														<Column width="15rem">
+															<Label text="Name organization"/>
+														</Column>
+													</suggestionColumns>
+													<suggestionRows>
+														<ColumnListItem>
+															<Label text="{Id}"/>
+															<Label text="{NameOrg}"/>
+														</ColumnListItem>
+													</suggestionRows>
+												</Input>
+												<Label text="Нзавание организации :" class="sapUiSmallMargin"/>
+												<Input id="oNameOrg" enabled="false" valueLiveUpdate="true"/>
+												<Label text="Адрес клиента :" class="sapUiSmallMargin"/>
+												<Input id="oAdrClient" enabled="false" valueLiveUpdate="true"/>
+											</f:content>
+										</f:SimpleForm>
                                     </VBox>
                                     <VBox>
                                         <layoutData>
@@ -61,43 +65,7 @@
                     </Panel>
                     <Panel class="sapUiResponsiveMargin" width="auto">
                         <m:content>
-                            <l:VerticalLayout>
-                                <Table id="idPositionTable"  mode="SingleSelectMaster" growing="true" growingThreshold="5" selectionChange="onSelectionChange" updateFinished="onUpdateFinished">
-                                    <headerToolbar>
-                                        <Toolbar>
-                                            <Title text="{i18n>nameTable}" />
-                                            <Button text="{i18n>nameButtonAddRow}" press=".onAddRow" icon="sap-icon://add"/>
-                                            <Button text="{i18n>nameButtonDeleteRow}" press=".onDeleteRow" icon="sap-icon://delete"/>
-                                        </Toolbar>
-                                    </headerToolbar>
-                                    <columns>
-                                        <Column>
-                                            <Label text="{i18n>id1}" />
-                                        </Column>
-                                        <Column>
-                                            <Label text="{i18n>id2}" />
-                                        </Column>
-                                        <Column>
-                                            <Label text="{i18n>id3}" />
-                                        </Column>
-                                        <Column>
-                                            <Label text="{i18n>id4}" />
-                                        </Column>
-                                        <Column>
-                                            <Label text="{i18n>id5}" />
-                                        </Column>
-                                        <Column>
-                                            <Label text="{i18n>id6}" />
-                                        </Column>
-                                        <Column>
-                                            <Label text="{i18n>id7}" />
-                                        </Column>
-                                        <Column>
-                                            <Label text="{i18n>id8}" />
-                                        </Column>
-                                    </columns>
-                                </Table>
-                            </l:VerticalLayout>
+                            <mvc:XMLView viewName="sap.ui.demo.testAppUI5.view.SmartTable"/>
                         </m:content>
                     </Panel>
                 </m:Page>
