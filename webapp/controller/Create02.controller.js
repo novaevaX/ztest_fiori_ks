@@ -14,7 +14,6 @@ sap.ui.define([
 	var id;
 	var type;
     var oModel;
-    var userdata;
     
     return Controller.extend("ztest_fiori_ks.controller.Create02", {
 		onInit : function (){
@@ -52,10 +51,7 @@ sap.ui.define([
 			var readurl = "/zstclientSet('"+oIdClient+"')";
 			oModel.read(readurl, {
 				success : function(oData, oResponse) {
-					
-					userdata = new sap.ui.model.json.JSONModel();
-					userdata.setData(oData);
-        			sap.ui.getCore().setModel(userdata, "data");
+				
         			this.getView().byId("oNameOrg").setValue(oData.valueOf().NameOrg);
         			this.getView().byId("oAdrClient").setValue(oData.valueOf().Address);
 					
@@ -95,13 +91,13 @@ sap.ui.define([
 			state = oBundle.getText("state01")
 		},
 		onAddRow: function(oEvent) {
-			var oItem = new sap.m.ColumnListItem({
+		/*	var oItem = new sap.m.ColumnListItem({
 			cells : [ new sap.m.Input(), new sap.m.Input({showValueHelp : true}), new sap.m.Input(), new sap.m.Input(), new sap.m.Input(), new sap.m.Input(), new sap.m.Input(), new sap.m.Input() ]
 				//new sap.m.Input({showValueHelp : true}) for cell
 			});
 			
 			var oTable = this.getView().byId('idPositionTable');
-			oTable.addItem(oItem);
+			oTable.addItem(oItem); */
 		},
 
 		onDeleteRow: function(oEvent){

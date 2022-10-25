@@ -25,7 +25,7 @@
 												<Label text="Тип документа :" class="sapUiSmallMargin"/>
 												<Input value="{/type}" enabled="false"/>
 												<Label id="idClient" text="Номер клиента :" class="sapUiSmallMargin"/>
-												<Input id="oSelectClient" value="{oModelClientInfo>}" placeholder="Enter organization" showSuggestion="true" showTableSuggestionValueHelp="false" change="onChangeId"
+												<Input id="oSelectClient" placeholder="Enter organization" showSuggestion="true" showTableSuggestionValueHelp="false" change="onChangeId"
 													suggestionRows="{/zstclientSet}">
 													<suggestionColumns>
 														<Column width="3rem">
@@ -65,7 +65,7 @@
                     </Panel>
                     <Panel class="sapUiResponsiveMargin" width="auto">
                         <m:content>
-                            <mvc:XMLView viewName="sap.ui.demo.testAppUI5.view.SmartTable"/>
+                            <mvc:XMLView viewName="ztest_fiori_ks.view.SmartTable"/>
                         </m:content>
                     </Panel>
                 </m:Page>

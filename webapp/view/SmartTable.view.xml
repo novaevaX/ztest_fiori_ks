@@ -6,6 +6,6 @@
 		</smartFilterBar:controlConfiguration>
 	</smartFilterBar:SmartFilterBar>
 	<smartTable:SmartTable id="smartTable_ResponsiveTable" smartFilterId="smartFilterBar" tableType="ResponsiveTable" editable="false"
-		entitySet="Documents" useVariantManagement="true" useTablePersonalisation="true" header="Позиции документа" showRowCount="true"
+		entitySet="ztestStr001Set" useVariantManagement="true" useTablePersonalisation="true" header="Позиции документа" showRowCount="true"
 		useExportToExcel="false" enableAutoBinding="true" persistencyKey="SmartTablePKey"></smartTable:SmartTable>
 </mvc:View>
