@@ -41,8 +41,9 @@
             </EntityType>
             <EntityType Name="zOrderDate" sap:content-version="1">
                 <Key>
-                    <PropertyRef Name="ZzorderType"/>
+                    <PropertyRef Name="zzorder"/>
                 </Key>
+                <Property Name="zzorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZzorderType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Zzuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Имя пользов." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Zzdate" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Дата" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>

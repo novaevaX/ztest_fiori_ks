@@ -74,6 +74,16 @@
 				"settings": {
 					"bundleName": "ztest_fiori_ks.i18n.i18n"
 				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZTEST_FIORI_KOSI_SRV",
+				"preload": true
 			}
 		},
 		"resources": {

@@ -17,7 +17,7 @@
     {
       "templateId": "servicecatalog.connectivityComponent",
       "templateVersion": "0.0.0",
-      "dateTimeStamp": "Fri, 28 Oct 2022 08:52:24 GMT"
+      "dateTimeStamp": "Fri, 28 Oct 2022 16:07:39 GMT"
     }
   ],
   "translation": {
@@ -45,7 +45,7 @@
     "targetFolder": "dist",
     "excludedFolders": [],
     "excludedFiles": [],
-    "lastBuildDateTime": "Fri, 28 Oct 2022 09:13:32 GMT"
+    "lastBuildDateTime": "Fri, 28 Oct 2022 17:13:51 GMT"
   },
   "deploy": {
     "destination": "S4D",

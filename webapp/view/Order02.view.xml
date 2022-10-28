@@ -30,17 +30,17 @@
                                                 <Label text="Дата :" class="sapUiSmallMargin" />
                                                 <Input value="{/date}" enabled="false" />
                                                 <Label text="Пользователь :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" enabled="false" />
+                                                <Input value="{/user}" enabled="false" />
                                                 <Label text="Номер документа :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" enabled="false" />
+                                                <Input value="{/number}" enabled="false" />
                                                 <Label text="Тип документа :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" enabled="false" />
+                                                <Input value="{/type}" enabled="false" />
                                                 <Label text="Номер клиента :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" enabled="false" />
+                                                <Input value="{/idOrg}" enabled="false" />
                                                 <Label text="Нзавание организации :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" enabled="false" />
+                                                <Input value="{/nameOrg}" enabled="false" />
                                                 <Label text="Адрес клиента :" class="sapUiSmallMargin" />
-                                                <Input value="{/recipient/name}" enabled="false" />
+                                                <Input value="{/adr}" enabled="false" />
                                             </f:content>
                                         </f:SimpleForm>
                                     </VBox>
@@ -51,7 +51,8 @@
                                         <Button text="{i18n>nameButtonExit}" press=".onExit" width="100%" icon="sap-icon://undo" />
                                         <Button text="{i18n>nameButtonCreateDoc}" press=".onCreate" width="100%" icon="sap-icon://add-document" />
                                         <Button text="{i18n>nameButtonSender}" press=".onCheck" width="100%" icon="sap-icon://email" />
-                                        <Text text="{i18n>textStatusDocument}" />
+                                        <Button text="{i18n>nameButtonRefresh}" press=".onRefresh" width="100%" />
+                                        <Text text="{i18n>textStatusDocument}" value="{/state}" />
                                     </VBox>
                                 </grid:CSSGrid>
                             </l:VerticalLayout>

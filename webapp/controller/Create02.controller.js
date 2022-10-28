@@ -1,13 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
-	"sap/base/util/uid",
 	"sap/ui/model/odata/v2/ODataModel",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/odata/CountMode",
 	"sap/ui/model/FilterOperator"
-], function (Controller, History, uid, ODataModel, Sorter, Filter, CountMode, FilterOperator){
+], function (Controller, History, ODataModel, Sorter, Filter, CountMode, FilterOperator){
     "use strict";
 	var state;
 	var oIdOrder;
@@ -93,7 +92,6 @@ sap.ui.define([
 		},
 		_createOrderSt: function(){
 			oIdOrder = sap.ui.getCore().getModel("oOrderId");
-			//oIdOrder = this.getView().byId("oOrderId").getValue();
 			type = this.getView().byId("oType").getValue();
 			oUserName = this.getView().byId("oUserName").getValue();
 			oDataSap = sap.ui.getCore().getModel("oDataSap");
@@ -107,7 +105,6 @@ sap.ui.define([
 				data.Zzdate = oDataSap;
 				data.ZzclientId = oIdClient;
 				data.Zzstatus = oStatusOrder;
-			
 			
 			var oCreateUrl = "/zOrderDateSet";
 			oModel.create(oCreateUrl, data, null,
@@ -128,17 +125,10 @@ sap.ui.define([
 			this._getDateResorces();
 		},
 		onUpdateState: function(){
-			var oBundle = this.getResourceBundle();
-			state = oBundle.getText("state01")
+			
 		},
 		onAddRow: function(oEvent) {
-		/*	var oItem = new sap.m.ColumnListItem({
-			cells : [ new sap.m.Input(), new sap.m.Input({showValueHelp : true}), new sap.m.Input(), new sap.m.Input(), new sap.m.Input(), new sap.m.Input(), new sap.m.Input(), new sap.m.Input() ]
-				//new sap.m.Input({showValueHelp : true}) for cell
-			});
-			
-			var oTable = this.getView().byId('idPositionTable');
-			oTable.addItem(oItem); */
+
 		},
 
 		onDeleteRow: function(oEvent){

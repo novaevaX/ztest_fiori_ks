@@ -32,18 +32,23 @@
 					        <Label text="{i18n>nameNumberDoc}"
                                 class= "sapUiSmallMargin"
                                 />
-					        <Input 
-                                id="numberDoc"
-                                value="{/recipient/name}"
-                                valueLiveUpdate="true"
-                                placeholder="пример: SH1000032234234"
-                                showValueHelp="true"
-                                width="50%" 
-                                maxLength="10"
-                                valueState="Error"
-                                valueStateText="Type must not be empty. Maximum 10 characters."
-                                change=".onChange"
-                                />
+							<Input id="oSelectOrder" placeholder="Enter order" showSuggestion="true" showTableSuggestionValueHelp="false" change="onSelect"
+								suggestionRows="{/zOrderDateSet}">
+								<suggestionColumns>
+									<Column width="3rem">
+										<Label text="ID"/>
+									</Column>
+									<Column width="10rem">
+										<Label text="User"/>
+									</Column>
+								</suggestionColumns>
+								<suggestionRows>
+									<ColumnListItem>
+										<Label text="{zzorder}"/>
+										<Label text="{Zzuser}"/>
+									</ColumnListItem>
+								</suggestionRows>
+							</Input>
 				        </f:content>
 			            </f:SimpleForm>
                         <Button
