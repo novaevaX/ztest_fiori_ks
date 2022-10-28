@@ -9,32 +9,46 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator"
 ], function (Controller, History, uid, ODataModel, Sorter, Filter, CountMode, FilterOperator){
     "use strict";
-	var date;
 	var state;
-	var id;
+	var oIdOrder;
 	var type;
     var oModel;
+    var oUserName;
+    var oDataSap;
+    var oUserData;
+    var oStatusOrder;
+    var oIdClient;
     
     return Controller.extend("ztest_fiori_ks.controller.Create02", {
 		onInit : function (){
-			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
+			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			this.getView().byId("oSelectClient").setModel(oModel);
-
-			this._getDateResorces();
-			var myUniqueID = uid();
-			id = myUniqueID;
-			var newDate = new Date();
-			date = newDate;
-
+			
+			this._getUserData();
 			this._getDateResorces();
 		},
+		_getUserData: function(){
+			var readurl = "/zUserDataSet";
+			oModel.read(readurl, {
+				success : function(oData, oResponse) {
+					sap.ui.getCore().setModel(oData.valueOf().results[0].zUserName, "oUserData");
+					sap.ui.getCore().setModel(oData.valueOf().results[0].zData, "oUserName");
+					sap.ui.getCore().setModel(oData.valueOf().results[0].zIdOrder, "oOrderId");
+					sap.ui.getCore().setModel(oData.valueOf().results[0].zViewData, "oDataSap");
+				}.bind(this)
+			});	
+		},
+
 		_getDateResorces: function(){
 			type = sap.ui.getCore().getModel("oSelectType");
+			oUserName = sap.ui.getCore().getModel("oUserData");
+			oUserData = sap.ui.getCore().getModel("oUserName");
+			oIdOrder = sap.ui.getCore().getModel("oOrderId");
 
 			var oDate = new sap.ui.model.json.JSONModel({
-				date: date,
-				user: "user",
-				number: id,
+				date: oUserData,
+				user: oUserName,
+				number: oIdOrder,
 				type: type,
 				state: state
 			}) ;
@@ -47,7 +61,7 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 	   },
 	   onChangeId : function(oEvent){
-	   		var oIdClient = oEvent.getParameters().valueOf().value;
+	   		oIdClient = oEvent.getParameters().valueOf().value;
 			var readurl = "/zstclientSet('"+oIdClient+"')";
 			oModel.read(readurl, {
 				success : function(oData, oResponse) {
@@ -77,12 +91,39 @@ sap.ui.define([
 		onExit: function(){
 			this.getOwnerComponent().getRouter().navTo("page1");
 		},
+		_createOrderSt: function(){
+			oIdOrder = sap.ui.getCore().getModel("oOrderId");
+			//oIdOrder = this.getView().byId("oOrderId").getValue();
+			type = this.getView().byId("oType").getValue();
+			oUserName = this.getView().byId("oUserName").getValue();
+			oDataSap = sap.ui.getCore().getModel("oDataSap");
+			oIdClient = this.getView().byId("oSelectClient").getValue();
+			oStatusOrder = this.getView().byId("stateOrder").getValue();
+			
+			var data = {};
+				data.zzorder = oIdOrder;
+				data.ZzorderType = type ;
+				data.Zzuser = oUserName;
+				data.Zzdate = oDataSap;
+				data.ZzclientId = oIdClient;
+				data.Zzstatus = oStatusOrder;
+			
+			
+			var oCreateUrl = "/zOrderDateSet";
+			oModel.create(oCreateUrl, data, null,
+				function(response) {
+                	alert("Data successfully created");
+                },
+                function(error){
+                	alert("Error while creating the data");
+                }
+             );
+		},
 		onCreate: function(){
+             this._createOrderSt();
 			
 		},
 		onCheck: function(){
-			var idClient = this.getView().byId("idClient");
-			
 			this.onUpdateState();
 			this._getDateResorces();
 		},

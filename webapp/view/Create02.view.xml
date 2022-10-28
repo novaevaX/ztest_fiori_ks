@@ -17,15 +17,15 @@
 										<f:SimpleForm id="panel" title="{i18n>titleCreateOrder}">
 											<f:content>
 												<Label text="Дата :" class="sapUiSmallMargin"/>
-												<Input value="{/date}" enabled="false"/>
+												<Input id="oDataUser" value="{/date}" enabled="false"/>
 												<Label text="Пользователь :" class="sapUiSmallMargin"/>
-												<Input value="{/user}" enabled="false"/>
+												<Input id="oUserName" value="{/user}" enabled="false"/>
 												<Label text="Номер документа :" class="sapUiSmallMargin"/>
-												<Input value="{/number}" enabled="false"/>
+												<Input id="oOrderId" value="{/number}" enabled="false"/>
 												<Label text="Тип документа :" class="sapUiSmallMargin"/>
-												<Input value="{/type}" enabled="false"/>
+												<Input id="oType" value="{/type}" enabled="false"/>
 												<Label id="idClient" text="Номер клиента :" class="sapUiSmallMargin"/>
-												<Input id="oSelectClient" placeholder="Enter organization" showSuggestion="true" showTableSuggestionValueHelp="false" change="onChangeId"
+												<Input id="oSelectClient" value="{oModelClientInfo>}" placeholder="Enter organization" showSuggestion="true" showTableSuggestionValueHelp="false" change="onChangeId"
 													suggestionRows="{/zstclientSet}">
 													<suggestionColumns>
 														<Column width="3rem">
@@ -63,11 +63,13 @@
                             </l:VerticalLayout>
                         </content>
                     </Panel>
+                    <!--
                     <Panel class="sapUiResponsiveMargin" width="auto">
                         <m:content>
                             <mvc:XMLView viewName="ztest_fiori_ks.view.SmartTable"/>
                         </m:content>
                     </Panel>
+                    -->
                 </m:Page>
             </pages>
         </App>

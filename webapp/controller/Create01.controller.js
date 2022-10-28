@@ -8,19 +8,26 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator"
 ], function (Controller, History, UIComponent, JSONModel, Fragment, Filter, FilterOperator){
     "use strict";
+    var oModel;
     return Controller.extend("ztest_fiori_ks.controller.Create01", {
 
 		onInit: function () {
-			var oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
+			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
 			this.getView().byId("oSelectType").setModel(oModel);
+			
+			
 		},
 		onCreate: function(){
+			
 			//получаем значение выбранного типа и сохраняем для следующей вьюшки
 			var typeInput = this.getView().byId("oSelectType").getSelectedItem().getText();
 			sap.ui.getCore().setModel(typeInput, "oSelectType");
+			
 			//переход на следующую вью
+			this.getOwnerComponent().getRouter().getTargets().display("rpage3");
 			this.getOwnerComponent().getRouter().navTo("page3");
 		},
+
 
         onBack : function () {
 			/*var sPreviousHasha = History.getInstance().getPreviousHash();
