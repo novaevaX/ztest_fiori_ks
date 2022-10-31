@@ -52,7 +52,8 @@
                                         <Button text="{i18n>nameButtonCreateDoc}" press=".onCreate" width="100%" icon="sap-icon://add-document" />
                                         <Button text="{i18n>nameButtonSender}" press=".onCheck" width="100%" icon="sap-icon://email" />
                                         <Button text="{i18n>nameButtonRefresh}" press=".onRefresh" width="100%" />
-                                        <Text text="{i18n>textStatusDocument}" value="{/state}" />
+                                        <Text text="{i18n>textStatusDocument}"/>
+                                        <Input enabled="false" id="stateOrder" value="{/state}"/>
                                     </VBox>
                                 </grid:CSSGrid>
                             </l:VerticalLayout>
