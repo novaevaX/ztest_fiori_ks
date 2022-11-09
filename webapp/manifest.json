@@ -42,10 +42,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_belize"
-		]
+		"supportedThemes": ["sap_hcb", "sap_belize"]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -57,7 +54,9 @@
 			"libs": {
 				"sap.ui.core": {},
 				"sap.m": {},
-				"sap.ui.layout": {},
+				"sap.ui.layout": {
+					"lazy": true
+				},
 				"sap.ushell": {},
 				"sap.collaboration": {},
 				"sap.ui.comp": {},
@@ -65,8 +64,8 @@
 			}
 		},
 		"contentDensities": {
-			"compact": true,
-			"cozy": true
+			"compact": false,
+			"cozy": false
 		},
 		"models": {
 			"i18n": {
@@ -74,24 +73,12 @@
 				"settings": {
 					"bundleName": "ztest_fiori_ks.i18n.i18n"
 				}
-			},
-			"": {
-				"type": "sap.ui.model.odata.v2.ODataModel",
-				"settings": {
-					"defaultOperationMode": "Server",
-					"defaultBindingMode": "TwoWay",
-					"defaultCountMode": "Request"
-				},
-				"dataSource": "ZTEST_FIORI_KOSI_SRV",
-				"preload": true
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
 			"config": {
@@ -106,53 +93,31 @@
 					"target": []
 				}
 			},
-			"routes": [
-				{
-					"name": "page1",
-					"pattern": "",
-					"titleTarget": "",
-					"greedy": true,
-					"target": [
-						"page1"
-					]
-				},
-				{
-					"name": "page2",
-					"pattern": "CreateOrder",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page2"
-					]
-				},
-				{
-					"name": "page3",
-					"pattern": "Order",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page3"
-					]
-				},
-				{
-					"name": "page4",
-					"pattern": "ViewOrder",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page4"
-					]
-				},
-				{
-					"name": "page5",
-					"pattern": "View",
-					"titleTarget": "",
-					"greedy": false,
-					"target": [
-						"page5"
-					]
-				}
-			],
+			"routes": [{
+				"name": "page1",
+				"pattern": "",
+				"titleTarget": "",
+				"greedy": true,
+				"target": ["page1"]
+			}, {
+				"name": "page2",
+				"pattern": "CreateOrder",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["page2"]
+			}, {
+				"name": "page4",
+				"pattern": "ViewOrder",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["page4"]
+			}, {
+				"name": "page5",
+				"pattern": "View",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["page5"]
+			}],
 			"targets": {
 				"page1": {
 					"viewType": "XML",
@@ -165,15 +130,8 @@
 					"viewType": "XML",
 					"transition": "slide",
 					"clearAggregation": true,
-					"viewName": "Create01",
-					"viewLevel": 2
-				},
-				"page3": {
-					"viewType": "XML",
-					"transition": "slide",
-					"clearAggregation": true,
 					"viewName": "Create02",
-					"viewLevel": 3
+					"viewLevel": 2
 				},
 				"page4": {
 					"viewType": "XML",

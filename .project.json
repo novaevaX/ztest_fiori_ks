@@ -17,7 +17,7 @@
     {
       "templateId": "servicecatalog.connectivityComponent",
       "templateVersion": "0.0.0",
-      "dateTimeStamp": "Fri, 28 Oct 2022 16:07:39 GMT"
+      "dateTimeStamp": "Wed, 02 Nov 2022 16:11:43 GMT"
     }
   ],
   "translation": {
@@ -40,7 +40,7 @@
     "blockPushLevel": "Error"
   },
   "build": {
-    "buildRequired": false,
+    "buildRequired": true,
     "sourceFolder": "webapp",
     "targetFolder": "dist",
     "excludedFolders": [],
@@ -58,9 +58,5 @@
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""
   },
-  "dataBinding": {
-    "/webapp/view/Create01.view.xml": {
-      "entitySet": "/zdctypeDocSet"
-    }
-  }
+  "dataBinding": {}
 }

@@ -15,6 +15,8 @@ sap.ui.define([
     var oDate;
     var oNameOrg;
     var oAdrOrg;
+    var oDescDoc;
+    
     return Controller.extend("ztest_fiori_ks.controller.Order02", {
     	
     	onInit: function(){
@@ -22,28 +24,29 @@ sap.ui.define([
     	oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 		this.getView().setModel(oModel);
     	
-		oOrder = sap.ui.getCore().getModel("oOrder");
-		var readurl = "/zOrderDateSet("+oOrder+")";
-			oModel.read(readurl, {
-				success : function(oData, oResponse) {
-					sap.ui.getCore().setModel(oData.ZzclientId, "oClientId");
-					sap.ui.getCore().setModel(oData.Zzdate, "oDate");
-					sap.ui.getCore().setModel(oData.ZzorderType, "oOrderType");
-					sap.ui.getCore().setModel(oData.Zzstatus, "oStatus");
-					sap.ui.getCore().setModel(oData.Zzuser, "oUser");
-					sap.ui.getCore().setModel(oData.zzorder, "oOrder");
-				}.bind(this)
-			});
+		// oOrder = sap.ui.getCore().getModel("oOrder");
+		// var readurl = "/zOrderDateSet("+oOrder+")";
+		// 	oModel.read(readurl, {
+		// 		success : function(oData, oResponse) {
+		// 			sap.ui.getCore().setModel(oData.ZzclientId, "oClientId");
+		// 			sap.ui.getCore().setModel(oData.Zzdate, "oDate");
+		// 			sap.ui.getCore().setModel(oData.ZzorderType, "oOrderType");
+		// 			sap.ui.getCore().setModel(oData.Zzstatus, "oStatus");
+		// 			sap.ui.getCore().setModel(oData.Zzuser, "oUser");
+		// 			sap.ui.getCore().setModel(oData.zzorder, "oOrder");
+		// 			sap.ui.getCore().setModel(oData.Zzdesc, "oDescDoc");
+		// 		}.bind(this)
+		// 	});
 			
-		oIdClient = sap.ui.getCore().getModel("oClientId");
-		readurl = "/zstclientSet('"+oIdClient+"')";
-		oModel.read(readurl, {
-			success : function(oData, oResponse) {
-				sap.ui.getCore().setModel(oData.Address, "oAdrOrg");
-				sap.ui.getCore().setModel(oData.NameOrg, "oNameOrg");
+		// oIdClient = sap.ui.getCore().getModel("oClientId");
+		// readurl = "/zstclientSet('"+oIdClient+"')";
+		// oModel.read(readurl, {
+		// 	success : function(oData, oResponse) {
+		// 		sap.ui.getCore().setModel(oData.Address, "oAdrOrg");
+		// 		sap.ui.getCore().setModel(oData.NameOrg, "oNameOrg");
 					
-		}.bind(this) });
-		
+		// }.bind(this) });
+		this._getDateResorces();
 		},
 		onRefresh: function(){
 			this._getDateResorces();
@@ -57,11 +60,13 @@ sap.ui.define([
 			oStatusOrder = sap.ui.getCore().getModel("oStatus");
 			oAdrOrg = sap.ui.getCore().getModel("oAdrOrg");
 			oNameOrg = sap.ui.getCore().getModel("oNameOrg");
+			oDescDoc = sap.ui.getCore().getModel("oDescDoc");
 			
 			oDate = new sap.ui.model.json.JSONModel({
 				date: oUserData,
 				user: oUserName,
 				number: oOrder,
+				desc: oDescDoc,
 				type: type,
 				idOrg: oIdClient,
 				state: oStatusOrder,
@@ -89,7 +94,7 @@ sap.ui.define([
 		onCreate: function(){
 			
 		},
-		onCheck: function(){
+		onSendMail: function(){
 			
 		}
     });

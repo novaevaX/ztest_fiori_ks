@@ -23,7 +23,7 @@
                                 <grid:CSSGrid id="grid1" gridAutoFlow="Column" gridTemplateColumns="1fr" gridTemplateRows="2rem" gridAutoRows="4.5rem" gridGap="1rem">
                                     <VBox class="demoBox">
                                         <layoutData>
-                                            <grid:GridItemLayoutData gridRow="1 / 7" />
+                                            <grid:GridItemLayoutData gridRow="1 / 8" />
                                         </layoutData>
                                         <f:SimpleForm title="{i18n>titlePageTextHeader}">
                                             <f:content>
@@ -33,6 +33,8 @@
                                                 <Input value="{/user}" enabled="false" />
                                                 <Label text="Номер документа :" class="sapUiSmallMargin" />
                                                 <Input value="{/number}" enabled="false" />
+                                                <Label text="Описание документа :" class="sapUiSmallMargin"/>
+												<Input value="{/desc}" enabled="false" />
                                                 <Label text="Тип документа :" class="sapUiSmallMargin" />
                                                 <Input value="{/type}" enabled="false" />
                                                 <Label text="Номер клиента :" class="sapUiSmallMargin" />
@@ -50,7 +52,7 @@
                                         </layoutData>
                                         <Button text="{i18n>nameButtonExit}" press=".onExit" width="100%" icon="sap-icon://undo" />
                                         <Button text="{i18n>nameButtonCreateDoc}" press=".onCreate" width="100%" icon="sap-icon://add-document" />
-                                        <Button text="{i18n>nameButtonSender}" press=".onCheck" width="100%" icon="sap-icon://email" />
+                                        <Button text="{i18n>nameButtonSender}" press=".onSendMail" width="100%" icon="sap-icon://email" />
                                         <Button text="{i18n>nameButtonRefresh}" press=".onRefresh" width="100%" />
                                         <Text text="{i18n>textStatusDocument}"/>
                                         <Input enabled="false" id="stateOrder" value="{/state}"/>
