@@ -54,7 +54,7 @@ sap.ui.define([
 				"Price": "",
 				"FullPrice": "",
 				"Storage": "",
-				"FullStorage": "",
+				"Quanstorage": "",
 				"editable": true,
 				"neweditable": true
 			};
@@ -112,34 +112,59 @@ sap.ui.define([
 			}
 
 		},
-		onCreateTable: function(order) {
+		onCreateTable: function (order) {
 
 			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			var rawdata = window.temp.getView().getModel("sOrder1").getData().Sales;
 			var data = {};
 			var oCreateUrl = "/ztestStr001Set";
+			var boolreact = true;
+			var isEmpty = false;
+
+			console.log();
 
 			rawdata.forEach(row => {
-				data.Id = row.Id;
-				data.Docnum = order;
-				data.Name = row.Name;
-				data.Nametype = row.NameType;
-				data.Quantity = row.Quantity;
-				data.Price = row.Price;
-				data.Fullprice = row.FullPrice;
-				data.Storege = row.Storage;
-				data.Quanstorage = row.Quanstorage;
-
-				oModel.create(oCreateUrl, data, null,
-					function(response) {
-						alert("Data successfully created");
-					},
-					function(error) {
-						alert("Error while creating the data");
-					}
-				);
+				isEmpty = isEmpty || Object.values(row).some(x => x === '');
 			});
 
+			if (order == -1 && rawdata.length == 0) {
+				MessageToast.show("Добавьте хотя бы одну строку в таблицу");
+				return false;
+			}
+
+			if (order == -1 && isEmpty == true) {
+				MessageToast.show("Заполните все поля в таблице");
+				return false;
+			}
+			else if(order == -1){
+				return true;
+			}
+
+			if (isEmpty) {
+				MessageToast.show("Заполните все поля в таблице");
+			}
+			else {
+				rawdata.forEach(row => {
+					data.Id = row.Id;
+					data.Docnum = order;
+					data.Name = row.Name;
+					data.Nametype = row.NameType;
+					data.Quantity = row.Quantity;
+					data.Price = row.Price;
+					data.Fullprice = row.FullPrice;
+					data.Storege = row.Storage;
+					data.Quanstorage = row.Quanstorage;
+
+					oModel.create(oCreateUrl, data, null,
+						function (response) {
+						},
+						function (error) {
+							boolreact = false;
+						}
+					);
+				});
+			}
+			return boolreact;
 		},
 	});
 });

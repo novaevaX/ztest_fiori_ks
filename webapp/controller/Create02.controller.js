@@ -168,18 +168,24 @@ sap.ui.define([
 			data.Zzstatus = oStatusOrder;
 			data.Zzdesc = oDesc;
 
+			var react = true;
+			react = sap.ui.controller("ztest_fiori_ks.controller.Table01").onCreateTable(oIdOrder);
+
 			var oCreateUrl = "/zOrderDateSet";
-			oModel.create(oCreateUrl, data, null,
-				function(response) {
-					alert("Document : " + oIdOrder + " successfully created");
-					
-					oExit = 1;
-				},
-				function(error) {
-					alert("Error while creating the data");
-				}
-			);
-			if(oExit === 1){
+			if (react) {
+				oModel.create(oCreateUrl, data, null,
+					function (response) {
+						alert("Document : " + oIdOrder + " successfully created");
+					},
+					function (error) {
+						alert("Error while creating the data");
+					}
+				);
+			}
+			else {
+				alert("Error while creating the data");
+			}
+			if (oExit === 1) {
 				this.onExit();
 			}
 		},
@@ -188,9 +194,11 @@ sap.ui.define([
 
 		},
 		onCheck: function() {
-			this._getDateResorces();
-			this.onChangeId();
-			this.onUpdateState();
+			if (sap.ui.controller("ztest_fiori_ks.controller.Table01").onCreateTable(-1)) {
+				this._getDateResorces();
+				this.onChangeId();
+				this.onUpdateState();
+			}
 		},
 		_checkField: function() {
 			oDesc = this.getView().byId("oDescDoc").getValue();
@@ -216,15 +224,6 @@ sap.ui.define([
 				this.getView().byId("oButtonCreate").setEnabled(true);
 			}
 
-		},
-		onAddRow: function(oEvent) {
-
-		},
-
-		onDeleteRow: function(oEvent) {
-			alert("i don't work ;D");
-			var oTable = this.getView().byId('idPositionTable');
-			oTable.removeItem(oEvent.getSource().getParent());
 		},
 
 		onOpenDialog: function() {
