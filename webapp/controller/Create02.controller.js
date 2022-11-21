@@ -168,6 +168,15 @@ sap.ui.define([
 			data.Zzstatus = oStatusOrder;
 			data.Zzdesc = oDesc;
 
+			var parametr = {};
+			parametr.zzorder = oIdOrder;
+			parametr.zzopendoc = " ";
+			parametr.zzsendmessage = " ";
+			parametr.zzagree1 = " ";
+			parametr.zzagree2 = " ";
+
+			var oParametrUrl = "/zParametrSaveSet";
+
 			var react = true;
 			react = sap.ui.controller("ztest_fiori_ks.controller.Table01").onCreateTable(oIdOrder);
 
@@ -175,7 +184,14 @@ sap.ui.define([
 			if (react) {
 				oModel.create(oCreateUrl, data, null,
 					function (response) {
-						alert("Document : " + oIdOrder + " successfully created");
+						oModel.create(oParametrUrl, parametr, null,
+							function (response){
+								alert("Document : " + oIdOrder + " successfully created");
+							},
+							function (error){
+								alert("Error while creating the data");
+							});
+						
 					},
 					function (error) {
 						alert("Error while creating the data");

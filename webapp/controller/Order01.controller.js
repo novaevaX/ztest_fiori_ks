@@ -49,6 +49,7 @@ sap.ui.define([
 						success: function(oData, oResponse) {
 							sap.ui.getCore().setModel(oData.Address, "oAdrOrg");
 							sap.ui.getCore().setModel(oData.NameOrg, "oNameOrg");
+							sap.ui.getCore().setModel(oData.zzuser, "oUser2");
 
 						}.bind(this)
 					});
