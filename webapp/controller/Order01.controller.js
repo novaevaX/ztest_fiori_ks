@@ -6,7 +6,7 @@ sap.ui.define([
 	"use strict";
 	var oModel;
 	var oOrder;
-	var oIdClient;
+	var readurl;
 
 	return Controller.extend("ztest_fiori_ks.controller.Order01", {
 		onInit: function() {
@@ -28,12 +28,26 @@ sap.ui.define([
 		onExit: function() {
 			this.getOwnerComponent().getRouter().navTo("page1");
 		},
+
+		onOpenDoc: function() {
+			this.getOwnerComponent().getRouter().navTo("page5");
+		},
+
 		onSelect: function(oEvent) {
 			oOrder = oEvent.getParameters().valueOf().value;
 			sap.ui.getCore().setModel(oOrder, "oOrder");
 
 			oOrder = sap.ui.getCore().getModel("oOrder");
-			var readurl = "/zOrderDateSet(" + oOrder + ")";
+			readurl = "/zParametrSaveSet(" + oOrder + ")";
+			oModel.read(readurl, {
+				success: function(oData, oResponse) {
+					sap.ui.getCore().setModel(oData.zzopendoc, "oOpenDoc");
+					sap.ui.getCore().setModel(oData.zzsendmessage, "oSendMessage");
+					sap.ui.getCore().setModel(oData.zzagree1, "oAgre1");
+					sap.ui.getCore().setModel(oData.zzagree2, "oAgre2");
+				}.bind(this)
+			});
+			readurl = "/zOrderDateSet(" + oOrder + ")";
 			oModel.read(readurl, {
 				success: function(oData, oResponse) {
 					sap.ui.getCore().setModel(oData.ZzclientId, "oClientId");
@@ -50,22 +64,10 @@ sap.ui.define([
 							sap.ui.getCore().setModel(oData.Address, "oAdrOrg");
 							sap.ui.getCore().setModel(oData.NameOrg, "oNameOrg");
 							sap.ui.getCore().setModel(oData.zzuser, "oUser2");
-
 						}.bind(this)
 					});
 				}.bind(this)
 			});
-
-			// var readurl = "/zOrderDateSet(" + oOrder + ")";
-			// oModel.read(readurl, {
-			// 	success: function(oData, oResponse) {
-			// 		sap.ui.getCore().setModel(oData.ZzclientId, "oClientId");
-			// 	}.bind(this)
-			// });
-		},
-		onOpenDoc: function() {
-
-			this.getOwnerComponent().getRouter().navTo("page5");
 		}
 	});
 });

@@ -18,6 +18,13 @@ sap.ui.define([
 	var oNameOrg;
 	var oAdrOrg;
 	var oDescDoc;
+	var oUser2;
+
+	var oOpenDoc;
+	var oSendMessage;
+	var oAgree1;
+	var oAgree2;
+	var oParametrUrl;
 
 	return Controller.extend("ztest_fiori_ks.controller.Order02", {
 
@@ -25,10 +32,41 @@ sap.ui.define([
 
 			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			this.getView().setModel(oModel);
+			this._getParametrDocInit();
 			this._getDateResorces();
 		},
 		onRefresh: function() {
 			this._getDateResorces();
+			this._setParametrInView();
+		},
+		_getParametrDocInit: function() {
+			oOpenDoc = sap.ui.getCore().getModel("oOpenDoc");
+			oSendMessage = sap.ui.getCore().getModel("oSendMessage");
+			oAgree1 = sap.ui.getCore().getModel("oAgree1");
+			oAgree2 = sap.ui.getCore().getModel("oAgree2");
+		},
+		_setParametrDoc: function() {
+			var parametr = {};
+			parametr.zzorder = oOrder;
+			parametr.zzopendoc = oOpenDoc;
+			parametr.zzsendmessage = oSendMessage;
+			parametr.zzagree1 = oAgree1;
+			parametr.zzagree2 = oAgree2;
+
+			oParametrUrl = "/zParametrSaveSet";
+
+			oModel.create(oParametrUrl, parametr, null,
+				function(response) {},
+				function(error) {});
+		},
+		_setParametrInView: function() {
+			if (oOpenDoc === 'X') {
+				this.getView().byId("oSendMail").setEnabled(true);
+			}
+			if (oSendMessage === 'X') {
+				this.getView().byId("oAgreeStart").setEnabled(true);
+			}
+
 		},
 		_getDateResorces: function() {
 			type = sap.ui.getCore().getModel("oOrderType");
@@ -40,7 +78,8 @@ sap.ui.define([
 			oAdrOrg = sap.ui.getCore().getModel("oAdrOrg");
 			oNameOrg = sap.ui.getCore().getModel("oNameOrg");
 			oDescDoc = sap.ui.getCore().getModel("oDescDoc");
-
+			oUser2 = sap.ui.getCore().getModel("oUser2");
+			
 			oDate = new sap.ui.model.json.JSONModel({
 				date: oUserData,
 				user: oUserName,
@@ -50,7 +89,8 @@ sap.ui.define([
 				idOrg: oIdClient,
 				state: oStatusOrder,
 				adr: oAdrOrg,
-				nameOrg: oNameOrg
+				nameOrg: oNameOrg,
+				agree: oUser2
 			});
 
 			this.getView().setModel(oDate);
@@ -81,9 +121,13 @@ sap.ui.define([
 				alert("Read failed");
 			});
 			this.getView().byId("oSendMail").setEnabled(true);
-
+			oOpenDoc = "X";
+			this._setParametrDoc();
 		},
+
 		onSendMail: function() {
+			oSendMessage = "X";
+			this._setParametrDoc();
 			this.getView().byId("oAgreeStart").setEnabled(true);
 			alert("Сообщения разосланы");
 		}
