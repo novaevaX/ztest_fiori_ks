@@ -92,11 +92,11 @@
                 <Key>
                     <PropertyRef Name="zzorder"/>
                 </Key>
-                <Property Name="zzorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="order number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="zzopendoc" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="document view" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="zzsendmessage" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="message send" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="zzagree1" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="side 1 agree" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="zzagree2" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="side 2 agree" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="order number" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzopendoc" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="document view" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzsendmessage" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="message send" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzagree1" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="side 1 agree" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzagree2" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="side 2 agree" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="zdctypeDoc" sap:content-version="1">
                 <Key>
@@ -137,17 +137,17 @@
             <EntityContainer Name="ZTEST_FIORI_KOSI_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="SubscriptionCollection" EntityType="ZTEST_FIORI_KOSI_SRV.Subscription" sap:content-version="1"/>
                 <EntitySet Name="NotificationCollection" EntityType="ZTEST_FIORI_KOSI_SRV.Notification" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="ztestStr001Set" EntityType="ZTEST_FIORI_KOSI_SRV.ztestStr" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="zstclientSet" EntityType="ZTEST_FIORI_KOSI_SRV.zstclient" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ztestStr001Set" EntityType="ZTEST_FIORI_KOSI_SRV.ztestStr" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="zstclientSet" EntityType="ZTEST_FIORI_KOSI_SRV.zstclient" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
                 <EntitySet Name="ztableDatCollection" EntityType="ZTEST_FIORI_KOSI_SRV.ztableDat" sap:content-version="1"/>
-                <EntitySet Name="zOrderDateSet" EntityType="ZTEST_FIORI_KOSI_SRV.zOrderDate" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="zfilesenderSet" EntityType="ZTEST_FIORI_KOSI_SRV.zfilesender" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="zParametrSaveSet" EntityType="ZTEST_FIORI_KOSI_SRV.zParametrSave" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="zdctypeDocSet" EntityType="ZTEST_FIORI_KOSI_SRV.zdctypeDoc" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="zUserDataSet" EntityType="ZTEST_FIORI_KOSI_SRV.zUserData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="ZtestShTypedocKosiSet" EntityType="ZTEST_FIORI_KOSI_SRV.ZtestShTypedocKosi" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="ZtestShClientKosiSet" EntityType="ZTEST_FIORI_KOSI_SRV.ZtestShClientKosi" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="zSenderMailSet" EntityType="ZTEST_FIORI_KOSI_SRV.zSenderMail" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="zOrderDateSet" EntityType="ZTEST_FIORI_KOSI_SRV.zOrderDate" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="zfilesenderSet" EntityType="ZTEST_FIORI_KOSI_SRV.zfilesender" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="zParametrSaveSet" EntityType="ZTEST_FIORI_KOSI_SRV.zParametrSave" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="zdctypeDocSet" EntityType="ZTEST_FIORI_KOSI_SRV.zdctypeDoc" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="zUserDataSet" EntityType="ZTEST_FIORI_KOSI_SRV.zUserData" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="ZtestShTypedocKosiSet" EntityType="ZTEST_FIORI_KOSI_SRV.ZtestShTypedocKosi" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="ZtestShClientKosiSet" EntityType="ZTEST_FIORI_KOSI_SRV.ZtestShClientKosi" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="zSenderMailSet" EntityType="ZTEST_FIORI_KOSI_SRV.zSenderMail" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
             </EntityContainer>
             <atom:link
                 xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZTEST_FIORI_KOSI_SRV/$metadata"/>

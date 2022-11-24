@@ -10,7 +10,7 @@ sap.ui.define([
 
 	return Controller.extend("ztest_fiori_ks.controller.Order01", {
 		onInit: function() {
-			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
+			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			this.getView().byId("oSelectOrder").setModel(oModel);
 		},
 		onBack: function() {

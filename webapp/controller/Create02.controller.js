@@ -25,7 +25,6 @@ sap.ui.define([
 	var oExit;
 	var isErrorResponse;
 	var isActive;
-	var iTimeoutId;
 
 	return Controller.extend("ztest_fiori_ks.controller.Create02", {
 		onInit: function() {

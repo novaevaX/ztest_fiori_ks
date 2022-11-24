@@ -24,7 +24,9 @@ sap.ui.define([
 	var oSendMessage;
 	var oAgree1;
 	var oAgree2;
+
 	var oParametrUrl;
+	var oStatusUrl;
 
 	return Controller.extend("ztest_fiori_ks.controller.Order02", {
 
@@ -53,10 +55,25 @@ sap.ui.define([
 			parametr.zzagree1 = oAgree1;
 			parametr.zzagree2 = oAgree2;
 
-			oParametrUrl = "/zParametrSaveSet";
+			oParametrUrl = "/zParametrSaveSet(" + oOrder + ")";
 
-			oModel.create(oParametrUrl, parametr, null,
-				function(response) {},
+			oModel.update(oParametrUrl, parametr, null,
+				function(response) {}.bind(this),
+				function(error) {});
+		},
+		_setStatusDoc: function() {
+			var data = {};
+			data.zzorder = oOrder;
+			data.ZzorderType = type;
+			data.Zzuser = oUserName;
+			data.Zzdate = oUserData;
+			data.ZzclientId = oIdClient;
+			data.Zzstatus = oStatusOrder;
+			data.Zzdesc = oDescDoc;
+
+			oStatusUrl = "/zOrderDateSet(" + oOrder + ")";
+			oModel.update(oStatusUrl, data, null,
+				function(response) {}.bind(this),
 				function(error) {});
 		},
 		_setParametrInView: function() {
@@ -79,7 +96,7 @@ sap.ui.define([
 			oNameOrg = sap.ui.getCore().getModel("oNameOrg");
 			oDescDoc = sap.ui.getCore().getModel("oDescDoc");
 			oUser2 = sap.ui.getCore().getModel("oUser2");
-			
+
 			oDate = new sap.ui.model.json.JSONModel({
 				date: oUserData,
 				user: oUserName,
@@ -120,9 +137,17 @@ sap.ui.define([
 			}, function() {
 				alert("Read failed");
 			});
-			this.getView().byId("oSendMail").setEnabled(true);
-			oOpenDoc = "X";
-			this._setParametrDoc();
+			
+			if (oOpenDoc === undefined) {
+				this.getView().byId("oSendMail").setEnabled(true);
+				oStatusOrder = "файл создан";
+				sap.ui.getCore().setModel(oStatusOrder, "oStatus");
+				oOpenDoc = "X";
+				this._setStatusDoc();
+				this._setParametrDoc();
+				this.onRefresh();
+			}
+
 		},
 
 		onSendMail: function() {

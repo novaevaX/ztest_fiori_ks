@@ -142,6 +142,15 @@
 					"target": [
 						"page5"
 					]
+				},
+				{
+					"name": "page666",
+					"pattern": "666",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"page666"
+					]
 				}
 			],
 			"targets": {
@@ -172,6 +181,13 @@
 					"clearAggregation": true,
 					"viewName": "Order02",
 					"viewLevel": 3
+				},
+				"page666": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "test",
+					"viewLevel": 2
 				}
 			}
 		}
