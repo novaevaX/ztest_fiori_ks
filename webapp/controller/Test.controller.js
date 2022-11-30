@@ -161,9 +161,9 @@ sap.ui.define([
 				oDialog.open();
 			}.bind(this));
 		},
-		onFilterBarSearch2: function(oEvent) {
+		onFilterBarSearch: function(oEvent) {
 			var aFilters = [];
-			var sQuery1 = oEvent.getParameter("selectionSet")[0].getProperty("value"); //oEvent.getSource().getValue();
+			var sQuery1 = oEvent.getParameter("selectionSet")[0].getProperty("value");
 			var sQuery2 = oEvent.getParameter("selectionSet")[1].getProperty("value");
 			if ((sQuery1 && sQuery1.length > 0) || (sQuery2 && sQuery2.length > 0)) {
 				var filter = new Filter({
@@ -185,65 +185,10 @@ sap.ui.define([
 			}
 
 			// update list binding
-			var oTable = this.oProductsModel.getTable();
+			var oTable = this._oVHD.getTable();
 			var oBinding = oTable.getBinding("rows");
 			oBinding.filter(aFilters, "Application");
 		},
-
-		onFilterBarSearch: function(oEvent) {
-			// debugger;
-			var sSearchQuery = this._oBasicSearchField.getValue(),
-				aSelectionSet = oEvent.getParameter("selectionSet");
-			var aFilters = aSelectionSet.reduce(function(aResult, oControl) {
-				if (oControl.getValue()) {
-					aResult.push(new Filter({
-						path: oControl.getName(),
-						operator: FilterOperator.Contains,
-						value1: oControl.getValue()
-					}));
-				}
-
-				return aResult;
-			}, []);
-
-			aFilters.push(new Filter({
-				filters: [
-					new Filter({
-						path: "Ztype",
-						operator: FilterOperator.Contains,
-						value1: sSearchQuery
-					}),
-					new Filter({
-						path: "Zdesc",
-						operator: FilterOperator.Contains,
-						value1: sSearchQuery
-					})
-				],
-				and: false
-			}));
-
-			this._filterTable(new Filter({
-				filters: aFilters,
-				and: true
-			}));
-		},
-		_filterTable: function(oFilter) {
-			// debugger;
-			var oVHD = this._oVHD;
-
-			oVHD.getTableAsync().then(function(oTable) {
-				if (oTable.bindRows) {
-					oTable.getBinding("rows").filter(oFilter);
-				}
-				if (oTable.bindItems) {
-					oTable.getBinding("items").filter(oFilter);
-				}
-
-				// This method must be called after binding update of the table.
-				oVHD.update();
-			});
-		},
-
 
 		onValueHelpOkPress: function(oEvent) {
 			var aTokens = oEvent.getParameter("tokens");

@@ -2,7 +2,7 @@
 	<ValueHelpDialog title="Product" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" supportRanges="true" key="Ztype"
 		descriptionKey="Zdesc">
 		<filterBar>
-			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch2">
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch">
 			<!--isRunningInValueHelpDialog="true">-->
 				<fb:filterGroupItems>
 					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Ztype" label="Type" visibleInFilterBar="true">
