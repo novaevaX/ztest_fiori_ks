@@ -1,13 +1,21 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"sap/ui/core/mvc/Controller",
+	"sap/m/MessageToast"
+], function(Controller, MessageToast) {
 	"use strict";
-	// var oModel;
+	var oModel;
 	return Controller.extend("ztest_fiori_ks.controller.first", {
 
 		onInit: function() {
-			// oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/", true);
+			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			// sap.ui.getCore().setModel(oModel, "oModel");
+			var readurl = "/zUserIncomingSet";
+			oModel.read(readurl, {
+				success: function(oData, oResponse) {
+					sap.ui.getCore().setModel(oData.valueOf().results[0].zuser, "oUserIncoming");
+					MessageToast.show(oData.valueOf().results[0].zuser + " Добро пожаловать");
+				}.bind(this)
+			});
 		},
 
 		onButtonCreate: function() {

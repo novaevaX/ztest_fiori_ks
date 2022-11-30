@@ -27,7 +27,12 @@
 			},
 			"tableData_alias": {
 				"uri": "model/sample.json",
-				"type": "JSON"
+				"type": "JSON",
+				"settings": {
+					"annotations": [
+						"ODataAnnotation1"
+					]
+				}
 			}
 		}
 	},

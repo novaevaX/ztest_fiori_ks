@@ -130,9 +130,16 @@
             </EntityType>
             <EntityType Name="zSenderMail" sap:content-version="1">
                 <Key>
-                    <PropertyRef Name="zIsSend"/>
+                    <PropertyRef Name="zzorder"/>
                 </Key>
+                <Property Name="zzorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zIsSend" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="zUserIncoming" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="zuser"/>
+                </Key>
+                <Property Name="zuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityContainer Name="ZTEST_FIORI_KOSI_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="SubscriptionCollection" EntityType="ZTEST_FIORI_KOSI_SRV.Subscription" sap:content-version="1"/>
@@ -148,6 +155,7 @@
                 <EntitySet Name="ZtestShTypedocKosiSet" EntityType="ZTEST_FIORI_KOSI_SRV.ZtestShTypedocKosi" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
                 <EntitySet Name="ZtestShClientKosiSet" EntityType="ZTEST_FIORI_KOSI_SRV.ZtestShClientKosi" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
                 <EntitySet Name="zSenderMailSet" EntityType="ZTEST_FIORI_KOSI_SRV.zSenderMail" sap:searchable="true" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="zUserIncomingSet" EntityType="ZTEST_FIORI_KOSI_SRV.zUserIncoming" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
             </EntityContainer>
             <atom:link
                 xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZTEST_FIORI_KOSI_SRV/$metadata"/>

@@ -43,8 +43,8 @@ sap.ui.define([
 				success: function(oData, oResponse) {
 					sap.ui.getCore().setModel(oData.zzopendoc, "oOpenDoc");
 					sap.ui.getCore().setModel(oData.zzsendmessage, "oSendMessage");
-					sap.ui.getCore().setModel(oData.zzagree1, "oAgre1");
-					sap.ui.getCore().setModel(oData.zzagree2, "oAgre2");
+					sap.ui.getCore().setModel(oData.zzagree1, "oAgree1");
+					sap.ui.getCore().setModel(oData.zzagree2, "oAgree2");
 				}.bind(this)
 			});
 			readurl = "/zOrderDateSet(" + oOrder + ")";

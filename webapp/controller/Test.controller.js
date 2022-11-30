@@ -161,10 +161,39 @@ sap.ui.define([
 				oDialog.open();
 			}.bind(this));
 		},
+		onFilterBarSearch2: function(oEvent) {
+			var aFilters = [];
+			var sQuery1 = oEvent.getParameter("selectionSet")[0].getProperty("value"); //oEvent.getSource().getValue();
+			var sQuery2 = oEvent.getParameter("selectionSet")[1].getProperty("value");
+			if ((sQuery1 && sQuery1.length > 0) || (sQuery2 && sQuery2.length > 0)) {
+				var filter = new Filter({
+					filters: [
+						new Filter({
+							path: "Ztype",
+							operator: FilterOperator.Contains,
+							value1: sQuery1
+						}),
+						new Filter({
+							path: "Zdesc",
+							operator: FilterOperator.Contains,
+							value1: sQuery2
+						})
+					],
+					and: true
+				});
+				aFilters.push(filter);
+			}
+
+			// update list binding
+			var oTable = this.oProductsModel.getTable();
+			var oBinding = oTable.getBinding("rows");
+			oBinding.filter(aFilters, "Application");
+		},
+
 		onFilterBarSearch: function(oEvent) {
+			// debugger;
 			var sSearchQuery = this._oBasicSearchField.getValue(),
 				aSelectionSet = oEvent.getParameter("selectionSet");
-
 			var aFilters = aSelectionSet.reduce(function(aResult, oControl) {
 				if (oControl.getValue()) {
 					aResult.push(new Filter({
@@ -199,6 +228,7 @@ sap.ui.define([
 			}));
 		},
 		_filterTable: function(oFilter) {
+			// debugger;
 			var oVHD = this._oVHD;
 
 			oVHD.getTableAsync().then(function(oTable) {
@@ -213,35 +243,7 @@ sap.ui.define([
 				oVHD.update();
 			});
 		},
-		// onFilterBarSearch: function(oEvent) {
-		// 	var aTokens = this._oMultiInput.getTokens();
-		// 	debugger;
-		// 	var aFilters = aTokens.map(function(oToken) {
-		// 		if (oToken.data("range")) {
-		// 			var oRange = oToken.data("range");
-		// 			return new Filter({
-		// 				path: "/ZtestShTypedocKosiSet",
-		// 				operator: oRange.exclude ? "NE" : oRange.operation,
-		// 				value1: oRange.value1,
-		// 				value2: oRange.value2
-		// 			});
-		// 		} else {
-		// 			return new Filter({
-		// 				path: "/ZtestShTypedocKosiSet",
-		// 				operator: "EQ",
-		// 				value1: aTokens[0].getKey()
-		// 			});
-		// 		}
-		// 	});
 
-		// 	var oSource = oEvent.getSource();
-		// 	var oBinding = oSource.getBinding('suggestionItems');
-		// 	oBinding.filter(aFilters);
-
-		// 	oBinding.attachEventOnce('dataReceived', function() {
-		// 		oSource.suggest();
-		// 	});
-		// },
 
 		onValueHelpOkPress: function(oEvent) {
 			var aTokens = oEvent.getParameter("tokens");

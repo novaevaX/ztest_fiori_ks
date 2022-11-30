@@ -28,11 +28,14 @@ sap.ui.define([
 	var oParametrUrl;
 	var oStatusUrl;
 
+	var oCurrentUser;
+
 	return Controller.extend("ztest_fiori_ks.controller.Order02", {
 
 		onInit: function() {
 
 			oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
+			oCurrentUser = sap.ui.getCore().getModel("oUserIncoming");
 			this.getView().setModel(oModel);
 			this._getParametrDocInit();
 			this._getDateResorces();
@@ -77,11 +80,20 @@ sap.ui.define([
 				function(error) {});
 		},
 		_setParametrInView: function() {
-			if (oOpenDoc === 'X') {
-				this.getView().byId("oSendMail").setEnabled(true);
-			}
-			if (oSendMessage === 'X') {
-				this.getView().byId("oAgreeStart").setEnabled(true);
+
+			if (oCurrentUser === oUserName || oCurrentUser === oUser2) {
+				if (oOpenDoc === 'X') {
+					this.getView().byId("oSendMail").setEnabled(true);
+				}
+				if (oSendMessage === 'X') {
+					this.getView().byId("oAgreeStart").setEnabled(true);
+				}
+				if (oAgree1 === 'X') {
+					this.getView().byId("agree1").setType("Success");
+				}
+				if (oAgree2 === 'X') {
+					this.getView().byId("agree2").setType("Success");
+				}
 			}
 
 		},
@@ -135,26 +147,70 @@ sap.ui.define([
 				opdfViewer.setSource(oData.__metadata.media_src);
 				opdfViewer.open();
 			}, function() {
-				alert("Read failed");
+				MessageToast.show("Read failed");
 			});
-			
-			if (oOpenDoc === undefined) {
-				this.getView().byId("oSendMail").setEnabled(true);
-				oStatusOrder = "файл создан";
-				sap.ui.getCore().setModel(oStatusOrder, "oStatus");
-				oOpenDoc = "X";
-				this._setStatusDoc();
-				this._setParametrDoc();
-				this.onRefresh();
+
+			if (oCurrentUser === oUserName || oCurrentUser === oUser2) {
+				if (oOpenDoc === undefined) {
+					this.getView().byId("oSendMail").setEnabled(true);
+					oStatusOrder = "файл создан";
+					sap.ui.getCore().setModel(oStatusOrder, "oStatus");
+					oOpenDoc = "X";
+					this._setStatusDoc();
+					this._setParametrDoc();
+					this.onRefresh();
+				}
 			}
 
 		},
+		onAgree: function() {
+			if (oCurrentUser === oUserName) {
+				this.onAgree1Button();
+			}
+			if (oCurrentUser === oUser2) {
+				this.onAgree1Button();
+			}
+		},
+		onAgree1Button: function() {
+			oAgree1 = "X";
+			if (oStatusOrder === "Процесс согласования") {
+				oStatusOrder = "Идёт согласование";
+			} else {
+				oStatusOrder = "Успешный успех";
+			}
+			sap.ui.getCore().setModel(oStatusOrder, "oStatus");
+			this._setStatusDoc();
+			this._setParametrDoc();
+			this.getView().byId("agree1").setType("Success");
+			MessageToast.show("Пользователь " + oUserName + " успешно согласовал");
+		},
+		onAgree2Button: function() {
+			oAgree2 = "X";
+			if (oStatusOrder === "Процесс согласования") {
+				oStatusOrder = "Идёт согласование";
+			} else {
+				oStatusOrder = "Успешный успех";
+			}
+			sap.ui.getCore().setModel(oStatusOrder, "oStatus");
+			this._setStatusDoc();
+			this._setParametrDoc();
+			this.getView().byId("agree2").setType("Success");
+			MessageToast.show("Пользователь " + oUser2 + " успешно согласовал");
+		},
 
 		onSendMail: function() {
+			oParametrUrl = "/zSenderMailSet(" + oOrder + ")";
+
+			oModel.read(oParametrUrl,
+				function(response) {}.bind(this),
+				function(error) {});
 			oSendMessage = "X";
+			oStatusOrder = "Процесс согласования";
+			sap.ui.getCore().setModel(oStatusOrder, "oStatus");
+			this._setStatusDoc();
 			this._setParametrDoc();
 			this.getView().byId("oAgreeStart").setEnabled(true);
-			alert("Сообщения разосланы");
+			MessageToast.show("Сообщения разосланы");
 		}
 	});
 });

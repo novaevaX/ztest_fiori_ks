@@ -55,9 +55,9 @@
 							<Text text="Степень согласования"/>
 							<f:SimpleForm>
 							<Label text="Сторона 1 :" class="sapUiSmallMargin"/>
-							<Input id="agree1" value="{/user}" enabled="false" valueState="Success" width="40%"/>
+							<Button id="agree1" text="{/user}" enabled="false" width="40%" type="Critical" press=".onAgree1Button" />
 							<Label text="Сторона 2 :" class="sapUiSmallMargin"/>
-							<Input id="agree2" value="{/agree}" enabled="false" valueState="Warning" width="40%"/>
+							<Button id="agree2" text="{/agree}" enabled="false" width="40%" type="Critical" press=".onAgree2Button"/>
 							</f:SimpleForm>
 						</content>
 					</Panel>
