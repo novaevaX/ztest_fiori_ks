@@ -12,23 +12,39 @@
 							<f:SimpleForm title="{i18n>titlePageText}">
 								<f:content>
 									<Label text="{i18n>nameNumberDoc}" class="sapUiSmallMargin"/>
-									<Input id="oSelectOrder" placeholder="Enter order" showSuggestion="true" showTableSuggestionValueHelp="false" change="onSelect"
-										suggestionRows="{/zOrderDateSet}">
+									<MultiInput id="multiInput" valueHelpRequest=".onValueHelpRequested" suggestionRows="{ path: '/ZtestShDocnumKosiSet'}" width="60%">
 										<suggestionColumns>
-											<Column width="1rem">
-												<Label text="ID"/>
+											<Column>
+												<Label text="Document"/>
 											</Column>
-											<Column width="10rem">
+											<Column>
 												<Label text="Description"/>
 											</Column>
 										</suggestionColumns>
 										<suggestionRows>
 											<ColumnListItem>
-												<Label text="{zzorder}"/>
+												<Label text="{Zzorder}"/>
 												<Label text="{Zzdesc}"/>
 											</ColumnListItem>
 										</suggestionRows>
-									</Input>
+									</MultiInput>
+									<!--<Input id="oSelectOrder" placeholder="Enter order" showSuggestion="true" showTableSuggestionValueHelp="false" change="onSelect"-->
+									<!--	suggestionRows="{/zOrderDateSet}">-->
+									<!--	<suggestionColumns>-->
+									<!--		<Column width="1rem">-->
+									<!--			<Label text="ID"/>-->
+									<!--		</Column>-->
+									<!--		<Column width="10rem">-->
+									<!--			<Label text="Description"/>-->
+									<!--		</Column>-->
+									<!--	</suggestionColumns>-->
+									<!--	<suggestionRows>-->
+									<!--		<ColumnListItem>-->
+									<!--			<Label text="{zzorder}"/>-->
+									<!--			<Label text="{Zzdesc}"/>-->
+									<!--		</ColumnListItem>-->
+									<!--	</suggestionRows>-->
+									<!--</Input>-->
 								</f:content>
 							</f:SimpleForm>
 							<Button text="{i18n>nameButtonOpenDoc}" press=".onOpenDoc" icon="sap-icon://open-command-field"/>

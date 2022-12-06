@@ -17,14 +17,6 @@
 			"inbounds": {}
 		},
 		"dataSources": {
-			"ZTEST_FIORI_KOSI_SRV": {
-				"uri": "/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "2.0",
-					"localUri": "localService/metadata.xml"
-				}
-			},
 			"tableData_alias": {
 				"uri": "model/sample.json",
 				"type": "JSON",
@@ -32,6 +24,14 @@
 					"annotations": [
 						"ODataAnnotation1"
 					]
+				}
+			},
+			"ZTEST_FIORI_KOSI_SRV": {
+				"uri": "/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
 				}
 			}
 		}

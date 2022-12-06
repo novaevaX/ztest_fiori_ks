@@ -32,6 +32,7 @@ sap.ui.define([
 			// oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			// this.getView().byId("multiInputWithSuggestions").setModel(oModel);
 		},
+		
 		onBack: function() {
 			var sPreviousHash = History.getInstance().getPreviousHash();
 			//The history contains a previous entry
@@ -192,7 +193,11 @@ sap.ui.define([
 
 		onValueHelpOkPress: function(oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
-			this._oMultiInput.setTokens(aTokens);
+			console.log("event : ", oEvent.getParameter);
+			// console.log("Token : ",aTokens);
+			// console.log(aTokens[0].mProperties.key);
+			// this._oMultiInput.setTokens(aTokens);
+			this._oMultiInput.setValue(aTokens[0].mProperties.key);
 			this._oVHD.close();
 		},
 
