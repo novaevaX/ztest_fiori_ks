@@ -224,20 +224,19 @@ sap.ui.define([
 					function (response) {
 						oModel.create(oParametrUrl, parametr, null,
 							function (response){
-								alert("Document : " + oIdOrder + " successfully created");
 							},
 							function (error){
-								alert("Error while creating the data");
+								MessageToast.show("Error while creating the data");
 							});
-						
 					},
 					function (error) {
-						alert("Error while creating the data");
+						MessageToast.show("Error while creating the data");
 					}
 				);
+				MessageToast.show("Document : " + oIdOrder + " successfully created");
 			}
 			else {
-				alert("Error while creating the data");
+				MessageToast.show("Error while creating the data");
 			}
 			if (oExit === 1) {
 				this.onExit();
