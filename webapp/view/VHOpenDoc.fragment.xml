@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
-	<ValueHelpDialog title="Product" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" supportRanges="true" key="Zzorder"
-		descriptionKey="Zdesc">
+	<ValueHelpDialog title="Number document" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" supportRanges="true" key="Zzorder"
+		descriptionKey="Zzdesc">
 		<filterBar>
 			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch">
 			<!--isRunningInValueHelpDialog="true">-->

@@ -7,7 +7,7 @@
 					<Panel class="sapUiResponsiveMargin" width="auto">
 						<form:SimpleForm editable="true">
 							<Label text="Test SH" labelFor="multiInput"/>
-							<MultiInput id="multiInput" width="60%" valueHelpRequest=".onValueHelpRequested" suggestionRows="{ path: '/ZtestShTypedocKosiSet'}">
+							<MultiInput id="multiInput" width="60%" valueHelpRequest=".onValueHelpRequested" suggestionRows="{ path: '/ZtestShDocnumKosiSet'}">
 								<suggestionColumns>
 									<Column>
 										<Label text="Type"/>
@@ -18,8 +18,8 @@
 								</suggestionColumns>
 								<suggestionRows>
 									<ColumnListItem>
-										<Label text="{Ztype}"/>
-										<Label text="{Zdesc}"/>
+										<Label text="{Zzorder}"/>
+										<Label text="{Zzdesc}"/>
 									</ColumnListItem>
 								</suggestionRows>
 							</MultiInput>

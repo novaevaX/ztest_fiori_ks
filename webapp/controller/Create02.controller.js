@@ -36,19 +36,24 @@ sap.ui.define([
 	var isActive;
 	
 	var oMultiInput;
+	var oMultiInput2;
 
 	return Controller.extend("ztest_fiori_ks.controller.Create02", {
 		onInit: function() {
 			// Value Help Dialog standard use case with filter bar without filter suggestions
 			oMultiInput = this.byId("multiInput");
 			this._oMultiInput = oMultiInput;
+			oMultiInput2 = this.byId("multiInput2");
+			this._oMultiInput2 = oMultiInput2;
 
 			oModel = new ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			this.oProductsModel = new ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			this.getView().setModel(this.oProductsModel);
+			this.oProductsModel2 = new ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
+			this.getView().setModel(this.oProductsModel2);
 			// this.getView().setModel(this.oModel);
 			isActive = 0;
-			this.getView().byId("oSelectClient").setModel(oModel);
+			// this.getView().byId("oSelectClient").setModel(oModel);
 			// this.getView().byId("oSearchField").setModel(oModel);
 			this.getView().byId("stateOrder").setValue("Новый");
 
@@ -133,7 +138,23 @@ sap.ui.define([
 		},
 
 		onChangeId: function() {
-			oIdClient = this.getView().byId("oSelectClient").getValue();
+			oIdClient = this.getView().byId("multiInput2").getValue();
+			var readurl = "/zstclientSet('" + oIdClient + "')";
+			oModel.read(readurl, {
+				success: function(oData, oResponse) {
+					this.getView().byId("oNameOrg").setValue(oData.valueOf().NameOrg);
+					this.getView().byId("oAdrClient").setValue(oData.valueOf().Address);
+					isErrorResponse = 0;
+				}.bind(this),
+				error: function(err) {
+					isErrorResponse = 1;
+				}
+			});
+
+		},
+
+		_onChangeId: function(number) {
+			oIdClient = number;
 			var readurl = "/zstclientSet('" + oIdClient + "')";
 			oModel.read(readurl, {
 				success: function(oData, oResponse) {
@@ -172,7 +193,7 @@ sap.ui.define([
 			type = this.getView().byId("multiInput").getValue();
 			oUserName = this.getView().byId("oUserName").getValue();
 			oDataSap = sap.ui.getCore().getModel("oDataSap");
-			oIdClient = this.getView().byId("oSelectClient").getValue();
+			oIdClient = this.getView().byId("multiInput2").getValue();
 			oStatusOrder = this.getView().byId("stateOrder").getValue();
 			oDesc = this.getView().byId("oDescDoc").getValue();
 
@@ -424,6 +445,178 @@ sap.ui.define([
 			setTimeout(function () {
 				oDialog.close();
 			}, 1000);
+		},
+		
+		
+		
+		// SH для типа компании
+
+		onValueHelpRequested2: function() {
+			this._oBasicSearchField2 = new SearchField();
+			if (!this.pDialog2) {
+				this.pDialog2 = Fragment.load({
+					id: this.getView().getId(),
+					name: "ztest_fiori_ks.view.VHClientType",
+					controller: this
+				});
+				// this.pDialog = this.loadFragment({
+				// 	name: "ztest_fiori_ks.view.VH"
+				// });
+			}
+			this.pDialog2.then(function(oDialog2) {
+				var oFilterBar2 = oDialog2.getFilterBar();
+				this._oVHD2 = oDialog2;
+				// Initialise the dialog with model only the first time. Then only open it
+				if (this._bDialogInitialized2) {
+					// Re-set the tokens from the input and update the table
+					oDialog2.setTokens([]);
+					oDialog2.setTokens(this._oMultiInput2.getTokens());
+					oDialog2.update();
+
+					oDialog2.open();
+					return;
+				}
+				this.getView().addDependent(oDialog2);
+
+				// Set key fields for filtering in the Define Conditions Tab
+				oDialog2.setRangeKeyFields([{
+					label: "ID",
+					key: "Id",
+					type: "string",
+					typeInstance: new TypeString({}, {
+						maxLength: 4
+					})
+				}]);
+
+				// Set Basic Search for FilterBar
+				oFilterBar2.setFilterBarExpanded(false);
+				oFilterBar2.setBasicSearch(this._oBasicSearchField2);
+
+				// Trigger filter bar search when the basic search is fired
+				this._oBasicSearchField2.attachSearch(function() {
+					oFilterBar2.search();
+				});
+
+				oDialog2.getTableAsync().then(function(oTable2) {
+
+					oTable2.setModel(this.oProductsModel2);
+
+					// For Desktop and tabled the default table is sap.ui.table.Table
+					if (oTable2.bindRows) {
+						// Bind rows to the ODataModel and add columns
+						oTable2.bindAggregation("rows", {
+							path: "/ZtestShClientKosiSet",
+							events: {
+								dataReceived: function() {
+									oDialog2.update();
+								}
+							}
+						});
+						oTable2.addColumn(new UIColumn({
+							label: "ID",
+							template: "Id"
+						}));
+						oTable2.addColumn(new UIColumn({
+							label: "Name",
+							template: "NameOrg"
+						}));
+						oTable2.addColumn(new UIColumn({
+							label: "Address",
+							template: "Address"
+						}));
+					}
+
+					// For Mobile the default table is sap.m.Table
+					if (oTable2.bindItems) {
+						// Bind items to the ODataModel and add columns
+						oTable2.bindAggregation("items", {
+							path: "/ZtestShClientKosiSet",
+							template: new ColumnListItem({
+								cells: [new Label({
+									text: "{Id}"
+								}), new Label({
+									text: "{NameOrg}"
+								}), new Label({
+									text: "{Address}"
+								})]
+							}),
+							events: {
+								dataReceived: function() {
+									oDialog2.update();
+								}
+							}
+						});
+						oTable2.addColumn(new MColumn({
+							header: new Label({
+								text: "ID"
+							})
+						}));
+						oTable2.addColumn(new MColumn({
+							header: new Label({
+								text: "Name"
+							})
+						}));
+						oTable2.addColumn(new MColumn({
+							header: new Label({
+								text: "Address"
+							})
+						}));
+					}
+					oDialog2.update();
+				}.bind(this));
+
+				oDialog2.setTokens(this._oMultiInput2.getTokens());
+
+				// set flag that the dialog is initialized
+				this._bDialogInitialized2 = true;
+				oDialog2.open();
+			}.bind(this));
+		},
+		onFilterBarSearch2: function(oEvent) {
+			var aFilters = [];
+			var sQuery1 = oEvent.getParameter("selectionSet")[0].getProperty("value");
+			var sQuery2 = oEvent.getParameter("selectionSet")[1].getProperty("value");
+			var sQuery3 = oEvent.getParameter("selectionSet")[2].getProperty("value");
+			if ((sQuery1 && sQuery1.length > 0) || (sQuery2 && sQuery2.length > 0) || (sQuery3 && sQuery3.length > 0)) {
+				var filter = new Filter({
+					filters: [
+						new Filter({
+							path: "Id",
+							operator: FilterOperator.Contains,
+							value1: sQuery1
+						}),
+						new Filter({
+							path: "NameOrg",
+							operator: FilterOperator.Contains,
+							value1: sQuery2
+						}),
+						new Filter({
+							path: "Address",
+							operator: FilterOperator.Contains,
+							value1: sQuery3
+						})
+					],
+					and: true
+				});
+				aFilters.push(filter);
+			}
+
+			// update list binding
+			var oTable = this._oVHD2.getTable();
+			var oBinding = oTable.getBinding("rows");
+			oBinding.filter(aFilters, "Application");
+		},
+
+		onValueHelpOkPress2: function(oEvent) {
+			var aTokens = oEvent.getParameter("tokens");
+			// this._oMultiInput.setTokens(aTokens);
+			this._oMultiInput2.setValue(aTokens[0].mProperties.key);
+			this._onChangeId(aTokens[0].mProperties.key);
+			this._oVHD2.close();
+		},
+
+		onValueHelpCancelPress2: function() {
+			this._oVHD2.close();
 		}
 
 	});

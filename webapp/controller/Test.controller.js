@@ -2,6 +2,7 @@ sap.ui.define([
 	'sap/ui/comp/library',
 	'sap/ui/core/mvc/Controller',
 	'sap/ui/model/type/String',
+	'sap/ui/model/type/Integer',
 	'sap/m/ColumnListItem',
 	'sap/m/Label',
 	'sap/m/SearchField',
@@ -14,7 +15,7 @@ sap.ui.define([
 	'sap/m/Text',
 	"sap/ui/core/routing/History",
 	"sap/ui/core/Fragment"
-], function(compLibrary, Controller, TypeString, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ODataModel, UIColumn,
+], function(compLibrary, Controller, TypeString, TypeInteger, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ODataModel, UIColumn,
 	MColumn, Text, History, Fragment) {
 	"use strict";
 
@@ -57,7 +58,7 @@ sap.ui.define([
 			if (!this.pDialog) {
 				this.pDialog = Fragment.load({
 					id: this.getView().getId(),
-					name: "ztest_fiori_ks.view.VH",
+					name: "ztest_fiori_ks.view.VHOpenDoc",
 					controller: this
 				});
 				// this.pDialog = this.loadFragment({
@@ -82,10 +83,10 @@ sap.ui.define([
 				// Set key fields for filtering in the Define Conditions Tab
 				oDialog.setRangeKeyFields([{
 					label: "Type",
-					key: "Ztype",
-					type: "string",
-					typeInstance: new TypeString({}, {
-						maxLength: 3
+					key: "Zzorder",
+					type: "int32",
+					typeInstance: new TypeInteger({}, {
+						maxLength: 5
 					})
 				}]);
 
@@ -106,7 +107,7 @@ sap.ui.define([
 					if (oTable.bindRows) {
 						// Bind rows to the ODataModel and add columns
 						oTable.bindAggregation("rows", {
-							path: "/ZtestShTypedocKosiSet",
+							path: "/ZtestShDocnumKosiSet",
 							events: {
 								dataReceived: function() {
 									oDialog.update();
@@ -115,11 +116,11 @@ sap.ui.define([
 						});
 						oTable.addColumn(new UIColumn({
 							label: "Type",
-							template: "Ztype"
+							template: "Zzorder"
 						}));
 						oTable.addColumn(new UIColumn({
 							label: "Description",
-							template: "Zdesc"
+							template: "Zzdesc"
 						}));
 					}
 
@@ -127,12 +128,12 @@ sap.ui.define([
 					if (oTable.bindItems) {
 						// Bind items to the ODataModel and add columns
 						oTable.bindAggregation("items", {
-							path: "/ZtestShTypedocKosiSet",
+							path: "/ZtestShDocnumKosiSet",
 							template: new ColumnListItem({
 								cells: [new Label({
-									text: "{Ztype}"
+									text: "{Zzorder}"
 								}), new Label({
-									text: "{Zdesc}"
+									text: "{Zzdesc}"
 								})]
 							}),
 							events: {
@@ -166,22 +167,24 @@ sap.ui.define([
 			var aFilters = [];
 			var sQuery1 = oEvent.getParameter("selectionSet")[0].getProperty("value");
 			var sQuery2 = oEvent.getParameter("selectionSet")[1].getProperty("value");
+			console.log("sQ1 : ", sQuery1, "; sQ2 : ", sQuery2);
 			if ((sQuery1 && sQuery1.length > 0) || (sQuery2 && sQuery2.length > 0)) {
 				var filter = new Filter({
 					filters: [
 						new Filter({
-							path: "Ztype",
-							operator: FilterOperator.Contains,
+							path: "Zzorder",
+							operator: FilterOperator.Contains, 
 							value1: sQuery1
 						}),
 						new Filter({
-							path: "Zdesc",
+							path: "Zzdesc",
 							operator: FilterOperator.Contains,
 							value1: sQuery2
 						})
 					],
 					and: true
 				});
+				console.log(filter);
 				aFilters.push(filter);
 			}
 

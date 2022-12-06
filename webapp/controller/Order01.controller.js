@@ -99,9 +99,6 @@ sap.ui.define([
 					name: "ztest_fiori_ks.view.VHOpenDoc",
 					controller: this
 				});
-				// this.pDialog = this.loadFragment({
-				// 	name: "ztest_fiori_ks.view.VH"
-				// });
 			}
 			this.pDialog.then(function(oDialog) {
 				var oFilterBar = oDialog.getFilterBar();
