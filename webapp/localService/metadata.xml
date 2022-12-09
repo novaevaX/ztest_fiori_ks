@@ -38,7 +38,7 @@
                     <PropertyRef Name="Docnum"/>
                 </Key>
                 <Property Name="Id" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="Docnum" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Docnum" Type="Edm.String" Nullable="false" MaxLength="11" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
                 <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
                 <Property Name="Nametype" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
                 <Property Name="Quantity" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
@@ -73,7 +73,7 @@
                 <Key>
                     <PropertyRef Name="zzorder"/>
                 </Key>
-                <Property Name="zzorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzorder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZzorderType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Zzuser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Имя пользов." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Zzdate" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Дата" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -85,14 +85,14 @@
                 <Key>
                     <PropertyRef Name="zorder"/>
                 </Key>
-                <Property Name="zorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zorder" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zfile" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="zParametrSave" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="zzorder"/>
                 </Key>
-                <Property Name="zzorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="order number" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzorder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="order number" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zzopendoc" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="document view" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zzsendmessage" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="message send" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zzagree1" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="side 1 agree" sap:sortable="false" sap:filterable="false"/>
@@ -108,7 +108,7 @@
                 <Key>
                     <PropertyRef Name="zUserName"/>
                 </Key>
-                <Property Name="zIdOrder" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zIdOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zViewData" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zData" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zUserName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -132,7 +132,7 @@
                 <Key>
                     <PropertyRef Name="zzorder"/>
                 </Key>
-                <Property Name="zzorder" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="zzorder" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="zIsSend" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="zUserIncoming" sap:content-version="1">
@@ -145,7 +145,7 @@
                 <Key>
                     <PropertyRef Name="Zzorder"/>
                 </Key>
-                <Property Name="Zzorder" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Zzorder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Zzdesc" Type="Edm.String" Nullable="false" MaxLength="200" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
             </EntityType>
             <EntityContainer Name="ZTEST_FIORI_KOSI_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">

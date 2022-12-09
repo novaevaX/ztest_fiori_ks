@@ -60,7 +60,7 @@ sap.ui.define([
 			sap.ui.getCore().setModel(oOrder, "oOrder");
 
 			// oOrder = sap.ui.getCore().getModel("oOrder");
-			readurl = "/zParametrSaveSet(" + oOrder + ")";
+			readurl = "/zParametrSaveSet('" + oOrder + "')";
 			oModel.read(readurl, {
 				success: function(oData, oResponse) {
 					sap.ui.getCore().setModel(oData.zzopendoc, "oOpenDoc");
@@ -69,7 +69,7 @@ sap.ui.define([
 					sap.ui.getCore().setModel(oData.zzagree2, "oAgree2");
 				}.bind(this)
 			});
-			readurl = "/zOrderDateSet(" + oOrder + ")";
+			readurl = "/zOrderDateSet('" + oOrder + "')";
 			oModel.read(readurl, {
 				success: function(oData, oResponse) {
 					sap.ui.getCore().setModel(oData.ZzclientId, "oClientId");

@@ -9,6 +9,7 @@ sap.ui.define([
 	"sap/ui/core/Fragment",
 	"sap/ui/core/syncStyleClass",
 	"sap/m/MessageToast",
+	"sap/m/MessageBox",
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/comp/library',
 	'sap/ui/model/type/String',
@@ -18,13 +19,15 @@ sap.ui.define([
 	'sap/ui/table/Column',
 	'sap/m/Column',
 	'sap/m/Text'
-], function(Controller, History, ODataModel, Sorter, Filter, CountMode, FilterOperator, Fragment, syncStyleClass, MessageToast, JSONModel, compLibrary, TypeString, ColumnListItem, 
-			Label, SearchField, UIColumn, MColumn, Text) {
+], function(Controller, History, ODataModel, Sorter, Filter, CountMode, FilterOperator, Fragment, syncStyleClass, MessageToast,
+	MessageBox, JSONModel, compLibrary, TypeString, ColumnListItem,
+	Label, SearchField, UIColumn, MColumn, Text) {
 	"use strict";
 	var state;
 	var oIdOrder;
 	var type;
 	var oModel;
+	var oModelnew;
 	var oUserName;
 	var oDataSap;
 	var oUserData;
@@ -34,7 +37,7 @@ sap.ui.define([
 	var oExit;
 	var isErrorResponse;
 	var isActive;
-	
+
 	var oMultiInput;
 	var oMultiInput2;
 
@@ -47,6 +50,7 @@ sap.ui.define([
 			this._oMultiInput2 = oMultiInput2;
 
 			oModel = new ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
+			oModelnew = new ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			this.oProductsModel = new ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			this.getView().setModel(this.oProductsModel);
 			this.oProductsModel2 = new ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
@@ -91,67 +95,6 @@ sap.ui.define([
 		getResourceBundle: function() {
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
-		onSuggestType: function(event) {
-			var sValue = event.getParameter("suggestValue"),
-				aFilters = [];
-			if (sValue) {
-				aFilters.push(new Filter({
-					filters: [
-						new Filter("Zdesc", FilterOperator.Contains, sValue.toUpperCase())
-						// new Filter("Ztype", FilterOperator.Contains, sValue.toUpperCase())
-					],
-					and: false
-				}));
-			}
-
-			var oSource = event.getSource();
-			var oBinding = oSource.getBinding('suggestionItems');
-			oBinding.filter(aFilters);
-
-			oBinding.attachEventOnce('dataReceived', function() {
-				oSource.suggest();
-			});
-
-		},
-		onSuggestClient: function(event) {
-			var sValue = event.getParameter("suggestValue"),
-				aFilters = [];
-			if (sValue) {
-				aFilters.push(new Filter({
-					filters: [
-						new Filter("NameOrg", FilterOperator.Contains, sValue.toUpperCase())
-						// new Filter("Ztype", FilterOperator.Contains, sValue.toUpperCase())
-					],
-					and: false
-				}));
-			}
-
-			var oSource = event.getSource();
-			var oBinding = oSource.getBinding('suggestionItems');
-			oBinding.filter(aFilters);
-
-			oBinding.attachEventOnce('dataReceived', function() {
-				oSource.suggest();
-			});
-			this.onChangeId();
-
-		},
-
-		onChangeId: function() {
-			oIdClient = this.getView().byId("multiInput2").getValue();
-			var readurl = "/zstclientSet('" + oIdClient + "')";
-			oModel.read(readurl, {
-				success: function(oData, oResponse) {
-					this.getView().byId("oNameOrg").setValue(oData.valueOf().NameOrg);
-					this.getView().byId("oAdrClient").setValue(oData.valueOf().Address);
-					isErrorResponse = 0;
-				}.bind(this),
-				error: function(err) {
-					isErrorResponse = 1;
-				}
-			});
-
-		},
 
 		_onChangeId: function(number) {
 			oIdClient = number;
@@ -168,10 +111,7 @@ sap.ui.define([
 			});
 
 		},
-		_setNotFoundClient: function() {
-			this.getView().byId("oNameOrg").setValue('value not found');
-			this.getView().byId("oAdrClient").setValue('value not found');
-		},
+
 		onBack: function() {
 			var sPreviousHash = History.getInstance().getPreviousHash();
 
@@ -213,31 +153,33 @@ sap.ui.define([
 			parametr.zzagree1 = " ";
 			parametr.zzagree2 = " ";
 
-			var oParametrUrl = "/zParametrSaveSet";
-
 			var react = true;
+			var oParametrUrl = "/zParametrSaveSet";
 			react = sap.ui.controller("ztest_fiori_ks.controller.Table01").onCreateTable(oIdOrder);
 
 			var oCreateUrl = "/zOrderDateSet";
 			if (react) {
 				oModel.create(oCreateUrl, data, null,
-					function (response) {
-						oModel.create(oParametrUrl, parametr, null,
-							function (response){
-							},
-							function (error){
-								MessageToast.show("Error while creating the data");
-							});
+					function(response) {
+						MessageBox.success("Document : " + oIdOrder + " successfully created");
 					},
-					function (error) {
+					function(error) {
 						MessageToast.show("Error while creating the data");
 					}
 				);
-				MessageToast.show("Document : " + oIdOrder + " successfully created");
+
+				oModelnew.create(oParametrUrl, parametr,
+					function(RESPONSE) {
+						MessageToast.show("Document : " + oIdOrder + " successfully created");
+					},
+					function(error) {}
+				);
+			} else {
+				MessageBox.error("Error while creating the data");
+				this.onExit();
 			}
-			else {
-				MessageToast.show("Error while creating the data");
-			}
+			MessageBox.success("Document : " + oIdOrder + " successfully created");
+
 			if (oExit === 1) {
 				this.onExit();
 			}
@@ -249,7 +191,7 @@ sap.ui.define([
 		onCheck: function() {
 			if (sap.ui.controller("ztest_fiori_ks.controller.Table01").onCreateTable(-1)) {
 				this._getDateResorces();
-				this.onChangeId();
+				// this.onChangeId();
 				this.onUpdateState();
 			}
 		},
@@ -267,8 +209,8 @@ sap.ui.define([
 			if (isErrorResponse === 1) {
 				this.getView().byId("oNameOrg").setValue('value not found');
 				this.getView().byId("oAdrClient").setValue('value not found');
-			} 
-			
+			}
+
 			this._checkField();
 			if (isActive === 0) {
 				this.getView().byId("stateOrder").setValue("Данные не заполнены");
@@ -280,10 +222,7 @@ sap.ui.define([
 
 		},
 
-
-
-
-// SH для типа документа
+		// SH для типа документа
 
 		onValueHelpRequested: function() {
 			this._oBasicSearchField = new SearchField();
@@ -435,19 +374,16 @@ sap.ui.define([
 			this._oVHD.close();
 		},
 
-
 		onOpenDialog: function() {
 			// load BusyDialog fragment asynchronously
 			var oDialog = this.byId("BusyDialog");
 			oDialog.open();
 
-			setTimeout(function () {
+			setTimeout(function() {
 				oDialog.close();
 			}, 1000);
 		},
-		
-		
-		
+
 		// SH для типа компании
 
 		onValueHelpRequested2: function() {
@@ -619,4 +555,72 @@ sap.ui.define([
 		}
 
 	});
+
+	// _setNotFoundClient: function() {
+	// 	this.getView().byId("oNameOrg").setValue('value not found');
+	// 	this.getView().byId("oAdrClient").setValue('value not found');
+	// },
+
+	// onSuggestType: function(event) {
+	// 	var sValue = event.getParameter("suggestValue"),
+	// 		aFilters = [];
+	// 	if (sValue) {
+	// 		aFilters.push(new Filter({
+	// 			filters: [
+	// 				new Filter("Zdesc", FilterOperator.Contains, sValue.toUpperCase())
+	// 				// new Filter("Ztype", FilterOperator.Contains, sValue.toUpperCase())
+	// 			],
+	// 			and: false
+	// 		}));
+	// 	}
+
+	// 	var oSource = event.getSource();
+	// 	var oBinding = oSource.getBinding('suggestionItems');
+	// 	oBinding.filter(aFilters);
+
+	// 	oBinding.attachEventOnce('dataReceived', function() {
+	// 		oSource.suggest();
+	// 	});
+
+	// },
+	// onSuggestClient: function(event) {
+	// 	var sValue = event.getParameter("suggestValue"),
+	// 		aFilters = [];
+	// 	if (sValue) {
+	// 		aFilters.push(new Filter({
+	// 			filters: [
+	// 				new Filter("NameOrg", FilterOperator.Contains, sValue.toUpperCase())
+	// 				// new Filter("Ztype", FilterOperator.Contains, sValue.toUpperCase())
+	// 			],
+	// 			and: false
+	// 		}));
+	// 	}
+
+	// 	var oSource = event.getSource();
+	// 	var oBinding = oSource.getBinding('suggestionItems');
+	// 	oBinding.filter(aFilters);
+
+	// 	oBinding.attachEventOnce('dataReceived', function() {
+	// 		oSource.suggest();
+	// 	});
+	// 	this.onChangeId();
+
+	// },
+
+	// onChangeId: function() {
+	// 	oIdClient = this.getView().byId("multiInput2").getValue();
+	// 	var readurl = "/zstclientSet('" + oIdClient + "')";
+	// 	oModel.read(readurl, {
+	// 		success: function(oData, oResponse) {
+	// 			this.getView().byId("oNameOrg").setValue(oData.valueOf().NameOrg);
+	// 			this.getView().byId("oAdrClient").setValue(oData.valueOf().Address);
+	// 			isErrorResponse = 0;
+	// 		}.bind(this),
+	// 		error: function(err) {
+	// 			isErrorResponse = 1;
+	// 		}
+	// 	});
+
+	// },
+
 });

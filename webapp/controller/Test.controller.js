@@ -2,7 +2,6 @@ sap.ui.define([
 	'sap/ui/comp/library',
 	'sap/ui/core/mvc/Controller',
 	'sap/ui/model/type/String',
-	'sap/ui/model/type/Integer',
 	'sap/m/ColumnListItem',
 	'sap/m/Label',
 	'sap/m/SearchField',
@@ -15,8 +14,8 @@ sap.ui.define([
 	'sap/m/Text',
 	"sap/ui/core/routing/History",
 	"sap/ui/core/Fragment"
-], function(compLibrary, Controller, TypeString, TypeInteger, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ODataModel, UIColumn,
-	MColumn, Text, History, Fragment) {
+], function(compLibrary, Controller, TypeString, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator,
+	ODataModel, UIColumn, MColumn, Text, History, Fragment) {
 	"use strict";
 
 	var oMultiInput;
@@ -33,7 +32,7 @@ sap.ui.define([
 			// oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZTEST_FIORI_KOSI_SRV/");
 			// this.getView().byId("multiInputWithSuggestions").setModel(oModel);
 		},
-		
+
 		onBack: function() {
 			var sPreviousHash = History.getInstance().getPreviousHash();
 			//The history contains a previous entry
@@ -84,11 +83,19 @@ sap.ui.define([
 				oDialog.setRangeKeyFields([{
 					label: "Type",
 					key: "Zzorder",
-					type: "int32",
-					typeInstance: new TypeInteger({}, {
+					type: "String",
+					typeInstance: new TypeString({}, {
 						maxLength: 5
 					})
 				}]);
+				// oDialog.setRangeKeyFields([{
+				// 	label: "Type",
+				// 	key: "Zzorder",
+				// 	type: "integer",
+				// 	typeInstance: new TypeInteger({}, {
+				// 		maxLength: 5
+				// 	})
+				// }]);
 
 				// Set Basic Search for FilterBar
 				oFilterBar.setFilterBarExpanded(false);
@@ -173,7 +180,7 @@ sap.ui.define([
 					filters: [
 						new Filter({
 							path: "Zzorder",
-							operator: FilterOperator.Contains, 
+							operator: FilterOperator.Contains,
 							value1: sQuery1
 						}),
 						new Filter({

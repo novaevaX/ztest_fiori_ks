@@ -58,7 +58,7 @@ sap.ui.define([
 			parametr.zzagree1 = oAgree1;
 			parametr.zzagree2 = oAgree2;
 
-			oParametrUrl = "/zParametrSaveSet(" + oOrder + ")";
+			oParametrUrl = "/zParametrSaveSet('" + oOrder + "')";
 
 			oModel.update(oParametrUrl, parametr, null,
 				function(response) {}.bind(this),
@@ -74,7 +74,7 @@ sap.ui.define([
 			data.Zzstatus = oStatusOrder;
 			data.Zzdesc = oDescDoc;
 
-			oStatusUrl = "/zOrderDateSet(" + oOrder + ")";
+			oStatusUrl = "/zOrderDateSet('" + oOrder + "')";
 			oModel.update(oStatusUrl, data, null,
 				function(response) {}.bind(this),
 				function(error) {});
@@ -142,7 +142,7 @@ sap.ui.define([
 		},
 		onCreate: function() {
 			var opdfViewer = new PDFViewer();
-			var sUrl = "/zfilesenderSet(" + oOrder + ")";
+			var sUrl = "/zfilesenderSet('" + oOrder + "')";
 			oModel.read(sUrl, null, null, true, function(oData, oResponse) {
 				opdfViewer.setSource(oData.__metadata.media_src);
 				opdfViewer.open();
@@ -199,7 +199,7 @@ sap.ui.define([
 		},
 
 		onSendMail: function() {
-			oParametrUrl = "/zSenderMailSet(" + oOrder + ")";
+			oParametrUrl = "/zSenderMailSet('" + oOrder + "')";
 
 			oModel.read(oParametrUrl,
 				function(response) {}.bind(this),
