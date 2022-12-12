@@ -272,7 +272,7 @@ sap.ui.define([
 							path: "/ZtestshposSet",
 							events: {
 								dataReceived: function() {
-									oDialog.update();
+									oDialog3.update();
 								}
 							}
 						});
@@ -375,7 +375,7 @@ sap.ui.define([
 		onValueHelpOkPress3: function(oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
 			this._oMultiInput3.setValue(aTokens[0].mProperties.key);
-			this._onChangeId(aTokens[0].mProperties.key);
+			// this._onChangeId(aTokens[0].mProperties.key);
 			this._oVHD3.close();
 		},
 
